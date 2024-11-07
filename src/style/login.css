@@ -1,0 +1,40 @@
+.login {
+
+
+  background: linear-gradient(0deg, #fff9, #fff), 
+              url(/bss-restaurant-app/src/assets/login-bg-left.png) no-repeat left center / contain, 
+              url(/bss-restaurant-app/src/assets/login-bg-right.png) no-repeat right center / contain, 
+              linear-gradient(0deg, black, black);
+
+
+  @media (max-width:525px) {
+    background-size: cover, cover;
+  }
+  
+  .img{
+    left:53%;
+  }
+  .login__right__container{
+    padding: 30px 45px;
+    border-width: 1px;
+    opacity: 1;
+    border-radius: .75rem;
+    background-color: #f1f1f1;
+    @media (min-width: 1024px) {
+  
+          width: 480px;
+      
+  }
+    header{
+      h1{
+        font-size: 24px;
+        letter-spacing: 2px;
+        text-shadow: #cc080b 2px 0px 0px, #cc080b 1.75517px .958851px 0px, #cc080b 1.0806px 1.68294px 0px, #cc080b .141474px 1.99499px 0px, #cc080b -.832294px 1.81859px 0px, #cc080b -1.60229px 1.19694px 0px, #cc080b -1.97998px .28224px 0px, #cc080b -1.87291px -.701566px 0px, #cc080b -1.30729px -1.5136px 0px, #cc080b -.421592px -1.95506px 0px, #cc080b .567324px -1.91785px 0px, #cc080b 1.41734px -1.41108px 0px, #cc080b 1.92034px -.558831px 0px;
+        @media (min-width:1024) {
+          font-size: 32px;
+        }
+
+      }
+    }
+  }
+}

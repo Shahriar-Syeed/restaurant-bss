@@ -1,0 +1,155 @@
+@import url(https://fonts.googleapis.com/css?family=Josefin+Sans:100,200,300,regular,500,600,700,100italic,200italic,300italic,italic,500italic,600italic,700italic);
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+input {
+  outline: none;
+  border: none;
+  background: none;
+}
+
+
+/* Border */
+
+.border-slate-250 {
+  border-color: rgb(220, 220, 220);
+}
+
+.border-primary {
+  border-color: #cc080b;
+}
+
+.border-slate-250:is(:hover, :focus-within, :focus, :active) {
+
+  border-color: black;
+}
+
+/* border radius */
+
+.rounded-50 {
+  border-radius: 50%;
+}
+
+/* Button */
+
+.button-primary,
+.bg-primary {
+  background-color: #cc080b;
+  color: #fff;
+}
+
+.button-primary--dark,
+.bg-primary--dark {
+  background-color: #8f0709;
+  color: #fff;
+}
+
+.button-primary:is(:hover, :active) {
+  background-color: rgb(155, 6, 8);
+}
+
+.button__outline--primary {
+  border: #cc080b solid 2px;
+  color: #cc080b;
+  padding: 8px 16px;
+  fill: #cc080b;
+  background: #fff;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: 0.3s;
+}
+
+.button-primary--dark:is(:hover, :active) {
+  background-color: #800608;
+}
+
+.button__outline--primary:hover {
+  color: #fff;
+  fill: #fff;
+  background: #cc080b;
+}
+
+/* Text Color */
+
+.text-primary {
+  color: #cc080b;
+}
+
+.text-zinc-350 {
+  color: rgb(166, 173, 187);
+}
+
+/* fill */
+
+.fill-primary {
+  fill: #cc080b;
+}
+
+.fill-currentcolor {
+  fill: currentColor;
+}
+
+
+.tracking-2px {
+  letter-spacing: 0.125em;
+}
+
+/* overflow */
+.overflow-unset {
+  overflow: unset;
+}
+
+/* width */
+.w-min-percentage {
+  width: min(500px, 70%);
+}
+
+
+
+.animation-duration-20000 {
+  animation-duration: 20s;
+
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
+
+.viewport-hight {
+  @media (min-width:1024px) {
+
+    height: calc(100svh - 16.875rem);
+  }
+}
+
+
+.bg--page {
+
+
+  background: linear-gradient(0deg, #fff9, #fff),
+    url(/bss-restaurant-app/src/assets/login-bg-left.png) no-repeat left center / contain,
+    url(/bss-restaurant-app/src/assets/login-bg-right.png) no-repeat right center / contain,
+    linear-gradient(0deg, black, black);
+
+
+  @media (max-width:525px) {
+    background-size: cover, cover;
+  }
+}
