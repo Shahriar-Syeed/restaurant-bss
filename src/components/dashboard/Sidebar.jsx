@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, redirect, useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 
 export default function Sidebar() {
@@ -7,6 +7,8 @@ export default function Sidebar() {
   const sidebarRef = useRef();
 
   const userInfo = JSON.parse(localStorage.getItem("user"));
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handler = (e) => {
@@ -27,6 +29,11 @@ export default function Sidebar() {
 
   function sidebarToggle() {
     setShowSidebar((prev) => !prev);
+  }
+  function goToLoginPage(){
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    navigate('/login');
   }
 
   return (
@@ -220,8 +227,8 @@ export default function Sidebar() {
           </ul>
           <ul>
             <li className="">
-              <Link
-                to="/login/"
+              <button
+                onClick={goToLoginPage}
                 className="w-full button__outline--primary rounded-full"
               >
                 <svg
@@ -233,7 +240,7 @@ export default function Sidebar() {
                   <path d="M10.09 15.59 11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2"></path>
                 </svg>
                 <span>Logout</span>
-              </Link>
+              </button>
             </li>
           </ul>
         </div>
