@@ -24,15 +24,12 @@ const HEADING = [
 ];
 
 export default function FoodsListPage() {
-
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [pageNumber, setPageNumber] = useState(1);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const foodDataTable = useSelector(
-    (state) => state.foods.foodDataTable
-  );
+  const foodDataTable = useSelector((state) => state.foods.foodDataTable);
   const loading = useSelector((state) => state.foods.loading);
 
   useEffect(() => {
@@ -44,6 +41,7 @@ export default function FoodsListPage() {
   // Modal
 
   const isOpen = useSelector((state) => state.modal.open);
+  const foodListId = useSelector(state=>state.modal.id);
   function closeModal() {
     dispatch(modalActions.close());
   }
@@ -51,18 +49,19 @@ export default function FoodsListPage() {
 
   return (
     <>
-      <Modal open={isOpen} onClose={closeModal}>
+     {errorMess && foodListId === 'foodList' && <Modal open={isOpen} onClose={closeModal}>
         <h1>Failed fetching data!</h1>
         {errorMess ? <p>{errorMess}</p> : <p>Invalid Password or Username</p>}
         <div className="modal-action p-2">
           <Button
             className="float-end button-primary px-4 py-2 rounded-lg"
+            type="button"
             onClick={closeModal}
           >
             Close
           </Button>
         </div>
-      </Modal>
+      </Modal>}
       <PageHeader
         title="All Food"
         buttonLabel="ADD FOOD"
@@ -71,21 +70,23 @@ export default function FoodsListPage() {
         }
       />
 
-      <div className="overflow-x-auto shadow-md sm:rounded-t-lg">
+      <div className="shadow-md sm:rounded-t-lg">
         <table className="w-full text-left rtl:text-right text-gray-900 text-xs sm:text-sm ">
-          <thead className="text-xs text-primary uppercase bg-gray-50">
+          <thead className="text-xs text-primary uppercase bg-gray-50 hidden sm:table-header-group">
             <tr>
               {HEADING?.map((heading) => (
                 <HeadTable key={heading.id}>{heading.label}</HeadTable>
               ))}
             </tr>
           </thead>
-          <tbody>
-           {foodDataTable?.data?.map(food=><RowTableFoodList
-              food={food}
-              deleteFood={handleDelete}
-              key={food.id}
-            />)}
+          <tbody className="block sm:table-row-group text-center sm:text-start">
+            {foodDataTable?.data?.map((food) => (
+              <RowTableFoodList
+                food={food}
+                deleteFood={handleDelete}
+                key={food.id}
+              />
+            ))}
           </tbody>
         </table>
       </div>
@@ -96,10 +97,7 @@ export default function FoodsListPage() {
         onChangePageNumber={setPageNumber}
         onChangeItemsPerPage={setItemsPerPage}
       />
-      {loading && <Loading />}
+      {loading && <Loading fullHeightWidth />}
     </>
   );
 }
-
-
-

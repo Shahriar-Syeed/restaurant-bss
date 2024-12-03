@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { employeeSelectActions } from "../../store/employee-select-slice";
 
 const EmployeeSelect = ({
-  label,
+  label='',
   options = [],
   onChange,
-  className,
+  className='',
   ...props
 }) => {
   const isOpen = useSelector((state) => state.employeeSelect.isOpen);
@@ -85,7 +85,7 @@ const EmployeeSelect = ({
         tabIndex={0}
       >
         <label
-          className={`absolute text-xsm sm:text-sm md:text-base transform pointer-events-none transition-all duration-300
+          className={`absolute text-xs sm:text-sm md:text-base transform pointer-events-none transition-all duration-300
           ${
             isFocused
               ? "scale-75 top-2 bg-white px-1 text-blue-500 -translate-y-4 origin-[0] z-10"
@@ -97,10 +97,8 @@ const EmployeeSelect = ({
 
         <span
           className={`flex-1 max-h-16 overflow-y-auto [&::-webkit-scrollbar]:w-2
-          [&::-webkit-scrollbar-track]:bg-gray-100
-          [&::-webkit-scrollbar-thumb]:bg-gray-300
-          dark:[&::-webkit-scrollbar-track]:bg-neutral-700
-          dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 ${
+          [&::-webkit-scrollbar-track]:bg-neutral-700
+          [&::-webkit-scrollbar-thumb]:bg-neutral-400 ${
             selectedOption
               ? "text-xsm sm:text-sm md:text-base"
               : "text-gray-400 "
@@ -125,7 +123,7 @@ const EmployeeSelect = ({
       </div>
 
       {isOpen && (
-        <ul className="absolute z-10 w-full bg-white border border-gray-300 rounded shadow-md mt-1 max-h-60 overflow-y-auto">
+        <ul className="absolute z-20 w-full bg-white border border-gray-300 rounded shadow-md mt-1 max-h-60 overflow-y-auto">
           {options?.map((option) => (
             <li
               key={option.value}
@@ -143,7 +141,7 @@ const EmployeeSelect = ({
               />
               <label
                 htmlFor={option.value}
-                className="flex-grow cursor-pointer"
+                className="flex-grow cursor-pointer text-xs sm:text-sm md:text-base ps-0.5 sm:ps-1 md:ps-2"
               >
                 {option.label}
               </label>

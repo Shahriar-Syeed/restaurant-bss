@@ -29,44 +29,46 @@ export default function EmployeeListPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const employeesRowData = useSelector(
-    (state) => state.employees.employeesRowData
-  );
- 
   const employeesDataTable = useSelector(
     (state) => state.employees.employeeDataTable
   );
   const loading = useSelector((state) => state.employees.loading);
-
-  useEffect(() => {
-    dispatch(getEmployees(pageNumber, itemsPerPage));
-  }, [pageNumber, itemsPerPage, dispatch]);
-  function handleDelete(employeeId) {
-    dispatch(deleteEmployee(employeeId));
-  }
+  const errorMess = useSelector((state) => state.employees.error);
   // Modal
+  const modalId = useSelector(state=>  state.modal.id);
 
   const isOpen = useSelector((state) => state.modal.open);
   function closeModal() {
     dispatch(modalActions.close());
   }
-  const errorMess = useSelector((state) => state.employees.error);
+
+  useEffect(() => {
+    dispatch(getEmployees(pageNumber, itemsPerPage));
+  }, [pageNumber, itemsPerPage, dispatch]);
+  function handleDelete(employeeId) {
+
+    closeModal();
+    dispatch(deleteEmployee(employeeId));
+  }
+  
 
   return (
     <>
 
-      <Modal open={isOpen} onClose={closeModal}>
+      {modalId === 'employee-list-fail' && <Modal open={isOpen} onClose={closeModal}>
         <h1>Failed fetching data!</h1>
         {errorMess ? <p>{errorMess}</p> : <p>Invalid Password or Username</p>}
         <div className="modal-action p-2">
           <Button
             className="float-end button-primary px-4 py-2 rounded-lg"
+            type="button"
             onClick={closeModal}
           >
             Close
           </Button>
         </div>
-      </Modal>
+      </Modal>}
+      
       <PageHeader
         title="All Employee"
         buttonLabel="ADD EMPLOYEE"
@@ -77,16 +79,15 @@ export default function EmployeeListPage() {
 
       <div className="overflow-x-auto shadow-md sm:rounded-t-lg">
         <table className="w-full text-left rtl:text-right text-gray-900 text-xs sm:text-sm ">
-          <thead className="text-xs text-primary uppercase bg-gray-50">
+          <thead className="text-xs text-primary uppercase bg-gray-50 hidden sm:table-header-group">
             <tr>
               {HEADING?.map((heading) => (
                 <HeadTable key={heading.id}>{heading.label}</HeadTable>
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="block sm:table-row-group text-center sm:text-start ">
             <RowTableEmployeeList
-              employees={employeesRowData}
               deleteEmployee={handleDelete}
             />
           </tbody>
@@ -99,7 +100,7 @@ export default function EmployeeListPage() {
         onChangePageNumber={setPageNumber}
         onChangeItemsPerPage={setItemsPerPage}
       />
-      {loading && <Loading />}
+      {loading && <Loading fullHeightWidth/>}
     </>
   );
 }

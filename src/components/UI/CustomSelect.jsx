@@ -7,6 +7,7 @@ const CustomSelect = ({
   options = [],
   className,
   id,
+  maximumHeight,
   onChanged,
   ...props
 }) => {
@@ -17,8 +18,6 @@ const CustomSelect = ({
   );
   const dispatch = useDispatch();
   const showOption = useRef();
-  
-
 
   useEffect(() => {
     const handler = (e) => {
@@ -38,25 +37,19 @@ const CustomSelect = ({
   const handleToggle = () => {
     dispatch(customSelectActions.setIsOpen(!isOpen));
 
-    if (
-      !selectedOption ||
-      (selectedOption && selectedOption.length === 0)
-    ) {
+    if (!selectedOption || (selectedOption && selectedOption.length === 0)) {
       dispatch(customSelectActions.setIsFocused(!isFocused));
     }
   };
 
-
   const handleSelect = (option) => {
-
     dispatch(customSelectActions.setSelectedOption(option));
 
     dispatch(customSelectActions.setIsOpen(false));
 
     dispatch(customSelectActions.setIsFocused(true));
-    // Trigger the onChanged function passed from parent
     if (onChanged) {
-      onChanged(option); // Pass the selected option to the parent
+      onChanged(option);
     }
   };
 
@@ -66,21 +59,20 @@ const CustomSelect = ({
       dispatch(customSelectActions.setIsFocused(true));
     }
   };
-  console.log("selectedOption", selectedOption);
 
   return (
-    <div className={`relative ${className && className}`} ref={showOption}>
-      
-        <input
-          type="hidden"
-          value={selectedOption ? selectedOption.sendingValue : 0}
-          onChange={(e)=>onChanged(e)}
-          {...props}
-
-        />
+    <div className={`${className ?? ''} relative`} ref={showOption}>
+      <input
+        type="hidden"
+        value={selectedOption ? selectedOption.sendingValue : 0}
+        onChange={(e) => onChanged(e)}
+        name={id ?? name}
+        id={id ?? name}
+        {...props}
+      />
 
       <div
-        className={`border rounded cursor-pointer w-full  p-3.5 flex items-center justify-between text-gray-900 bg-transparent border-solid appearance-none hover:border-gray-400 border-gray-200
+        className={`relative border rounded cursor-pointer sm:p-3.5 p-1.5 flex items-center justify-between text-gray-900 bg-transparent border-solid appearance-none hover:border-gray-400 border-gray-200
         ${isFocused ? "border-blue-900" : "border-gray-200"}`}
         onClick={handleToggle}
         onBlur={handleBlur}
@@ -89,10 +81,10 @@ const CustomSelect = ({
         tabIndex={0}
       >
         <label
-          className={`absolute text-xsm sm:text-sm md:text-base transform pointer-events-none transition-all duration-300
+          className={`absolute ps-1.5 text-xs sm:text-sm md:text-base transform pointer-events-none transition-all duration-300
           ${
             isFocused
-              ? "scale-75 top-2 bg-white px-1 text-blue-500 -translate-y-4 origin-[0] z-10"
+              ? "scale-75 top-2 bg-white text-blue-500 sm:-translate-x-4 -translate-y-3.5 origin-[0] z-10"
               : "text-gray-500 top-1/2 -translate-y-1/2 rtl:translate-x-1/4 rtl:left-auto"
           }`}
         >
@@ -101,16 +93,14 @@ const CustomSelect = ({
 
         <span
           className={`flex-1 max-h-16 overflow-y-auto [&::-webkit-scrollbar]:w-2
-          [&::-webkit-scrollbar-track]:bg-gray-100
-          [&::-webkit-scrollbar-thumb]:bg-gray-300
-          dark:[&::-webkit-scrollbar-track]:bg-neutral-700
-          dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 ${
+          [&::-webkit-scrollbar-track]:bg-neutral-700
+          [&::-webkit-scrollbar-thumb]:bg-neutral-300 ${
             selectedOption
               ? "text-xsm sm:text-sm md:text-base"
               : "text-gray-400 "
           }`}
         >
-          { selectedOption?.label}
+          {selectedOption?.label}
         </span>
         <svg
           className={`transform transition-transform ${
@@ -127,16 +117,18 @@ const CustomSelect = ({
       </div>
 
       {isOpen && (
-        <ul className="absolute z-10 w-full bg-white border border-gray-300 rounded shadow-md mt-1 max-h-60 overflow-y-auto">
+        <ul
+          className={`absolute z-20 w-full bg-white border border-gray-300 rounded shadow-md mt-1 max-h-${maximumHeight} overflow-y-auto`}
+        >
           {options?.map((option) => (
-              <li
-                key={option.value}
-                className="p-2 hover:bg-gray-100 cursor-pointer"
-                onClick={() => handleSelect(option)}
-              >
-                {option.label}
-              </li>
-            ))}
+            <li
+              key={option.value}
+              className="p-2 hover:bg-gray-100 cursor-pointer text-xs sm:text-sm md:text-base"
+              onClick={() => handleSelect(option)}
+            >
+              {option.label}
+            </li>
+          ))}
         </ul>
       )}
     </div>

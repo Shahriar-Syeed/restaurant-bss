@@ -14,6 +14,7 @@ export default function PageHeader({
         <Button
           className="button__outline--primary rounded-md text-sm leading-none"
           onClick={buttonOnClick}
+          type='button'
         >
           {buttonLabel}
         </Button>

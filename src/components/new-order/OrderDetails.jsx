@@ -1,32 +1,67 @@
+import { useDispatch } from "react-redux";
 import defaultImage from "../../assets/default-image-preview.png";
 import Button from "../UI/Button";
+import {
+  addFood,
+  removeFoodItem,
+  subtractFoodQuantity,
+} from "../../store/cart-actions";
 
 export default function OrderDetails({ cartItem }) {
+  const dispatch = useDispatch();
+  function increaseFoodQuantity(foodId) {
+    dispatch(addFood(foodId));
+    console.log(cartItem);
+  }
+  function decreaseFoodQuantity(foodId) {
+    dispatch(subtractFoodQuantity(foodId));
+    console.log("first");
+  }
+  function deleteFoodFormCart(foodId) {
+    dispatch(removeFoodItem(foodId));
+  }
+
   return (
-    <div className="flex items-center gap-1 lg:gap-3 sm-gap-2 py-2.5">
+    <div className="flex items-center gap-1 lg:gap-3 sm-gap-2 py-2.5 mb-1 border-b pe-4">
       <div className="h-16 w-16 overflow-clip rounded-lg">
         <img
           src={
-            cartItem.image
-              ? `https://restaurantapi.bssoln.com/images/food/${cartItem.image}`
+            cartItem.foodImage !== ""
+              ? `https://restaurantapi.bssoln.com/images/food/${cartItem.foodImage}`
               : defaultImage
           }
           alt=""
-          className="h-full w-full object-cover"
+          className="h-full w-fit object-cover "
         />
       </div>
       <div>
-        <h2 className="font-bold">{cartItem.name}</h2>
+        <h2 className="font-bold">{cartItem.foodName}</h2>
         <div>
-          <Button className="p-2 border rounded-l-lg">-</Button>
-          <span className="border border-s-0 border-e-0 p-2 inline-block">
+          <Button
+            className="p-2 border rounded-l-lg text-xl font-bold hover:bg-slate-100"
+            type="button"
+            onClick={() => decreaseFoodQuantity(cartItem.foodId)}
+          >
+            -
+          </Button>
+          <span className="border border-s-0 border-e-0 p-2 inline-block text-xl font-bold">
             {cartItem.quantity}
           </span>
-          <Button className="p-2 border rounded-r-lg">+</Button>
+          <Button
+            className="p-2 border rounded-r-lg text-xl font-bold hover:bg-slate-100"
+            type="button"
+            onClick={() => increaseFoodQuantity(cartItem.foodId)}
+          >
+            +
+          </Button>
         </div>
       </div>
       <div className="ms-auto text-end">
-        <Button className="mb-2">
+        <Button
+          className="mb-2 p-1 rounded-50 hover:"
+          type="button"
+          onClick={() => deleteFoodFormCart(cartItem.foodId)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="#222222"
@@ -46,7 +81,9 @@ export default function OrderDetails({ cartItem }) {
             </g>
           </svg>
         </Button>
-        <p>Price: {cartItem.price}</p>
+        <p className="text-green-900 font-bold ">
+          Price: {cartItem.totalPrice}&#2547;
+        </p>
       </div>
     </div>
   );

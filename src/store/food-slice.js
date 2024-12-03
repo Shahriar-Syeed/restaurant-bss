@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialFoods = {
-  foodDataTable:{},
+  foodDataTable: {},
   selectedFoodImage: undefined,
   preview: undefined,
   loading: false,
   error: null,
-  lastPage: "",
+  singleFoodItem: {},
 };
 
 const foodSlice = createSlice({
@@ -24,18 +24,29 @@ const foodSlice = createSlice({
     },
     loading(state, action) {
       state.loading = action.payload;
-    },   
+    },
     errorMessage(state, action) {
       state.error = action.payload;
     },
-    setLastPag(state, action) {
-      state.lastPage = action.payload;
+    setFoodItem(state, action) {
+      state.singleFoodItem = action.payload;
     },
 
     removeFood(state, action) {
-      state.foodDataTable = {...state.foodDataTable, data: state.foodDataTable.data.filter(
-        (food) => food.id !== action.payload
-      )};
+      state.foodDataTable = {
+        ...state.foodDataTable,
+        data: state.foodDataTable.data.filter(
+          (food) => food.id !== action.payload
+        ),
+      };
+    },
+    updateFood(state, action) {
+      state.foodDataTable = {
+        ...state.foodDataTable,
+        data: state.foodDataTable.data.map(
+          (food) => food.id === action.payload.id ? {id: action.payload.id, ...action.payload.data}: food
+        ),
+      };
     },
   },
 });

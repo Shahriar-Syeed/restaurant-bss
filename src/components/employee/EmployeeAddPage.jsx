@@ -1,12 +1,18 @@
-import EmployeeForm from "./EmployeeCreateForm.jsx";
-import PageHeader from "../PageHeader.jsx";
 
+import PageHeader from "../PageHeader.jsx";
+import EmployeeCreateForm from './EmployeeCreateForm.jsx';
+import { useNavigate } from "react-router-dom";
 
 export default function EmployeeAddPage() {
+  const navigate = useNavigate();
   return (
     <>
-      <PageHeader title='Add Employee' />
-      <EmployeeForm/>
+      <PageHeader
+        title="Add Employee"
+        buttonLabel="BACK"
+        buttonOnClick={() => navigate("../employee-list")}
+      />
+      <EmployeeCreateForm/>
     </>
-  )
+  );
 }

@@ -3,16 +3,17 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import Button from "./Button";
 
-
 export default function Input({
   children,
   id,
   error,
   eyeButton,
   labelClass,
+  outerClassName,
+  errorClass,
   ...props
 }) {
-  const [toggle, setToggle] = useState(false); 
+  const [toggle, setToggle] = useState(false);
 
   const eyeIcon = toggle ? (
     <svg aria-hidden="true" viewBox="0 0 24 24" className="w-6 h-6">
@@ -31,45 +32,56 @@ export default function Input({
 
   return (
     <>
-      <label
-        htmlFor={id}
-        className={
-          labelClass
-            ? labelClass
-            : "block text-lg text-zinc-350 mb-2 capitalize"
-        }
-      >
-        {children}
-      </label>
       {eyeButton ? (
-        <div className="flex p-3.5 rounded border border-slate-250 items-center">
-
-          <input
-            type={toggle ? "text" : "password"}
-            id={id}
-            name={id}
-            className="h-6 block"
-            {...props}
-            style={{ width: "90%" }}
-          />
-          <Button
-            type="button"
-            onClick={() => setToggle(!toggle)}
-            className="text-only hover:fill-red-600 tracking p-2 fill-slate-600 rounded-full hover:bg-slate-200"
+        <>
+          <label
+            htmlFor={id}
+            className={
+              labelClass
+                ? labelClass
+                : "block text-lg text-zinc-350 mb-2 capitalize"
+            }
           >
-            {eyeIcon}
-          </Button>
-        </div>
+            {children}
+          </label>
+
+          <div className="flex p-3.5 rounded border border-slate-250 items-center">
+            <input
+              type={toggle ? "text" : "password"}
+              id={id}
+              name={id}
+              className="h-6 block"
+              {...props}
+              style={{ width: "90%" }}
+            />
+            <Button
+              type="button"
+              onClick={() => setToggle(!toggle)}
+              className="text-only hover:fill-red-600 tracking p-2 fill-slate-600 rounded-full hover:bg-slate-200"
+            >
+              {eyeIcon}
+            </Button>
+          </div>
+          <div className="control-error">{error && <p>{error}</p>}</div>
+        </>
       ) : (
-        <div>
-          <input
-            {...props}
-            id={id}
-            name={id}       
-          />
-        </div>
+        <>
+          <div className={outerClassName && outerClassName}>
+            <label
+              htmlFor={id}
+              className={
+                labelClass
+                  ? labelClass
+                  : "block text-lg text-zinc-350 mb-2 capitalize"
+              }
+            >
+              {children}
+            </label>
+            <input {...props} id={id ?? name} name={id ?? name} />
+          </div>
+          <div className={errorClass && errorClass}>{error && <p>{error}</p>}</div>
+        </>
       )}
-      <div className="control-error">{error && <p>{error}</p>}</div>
     </>
   );
 }

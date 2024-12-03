@@ -5,7 +5,7 @@ import Button from "../UI/Button.jsx";
 // import apiUrl from "../../apiUrl/ApiUrl.jsx";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import useLoading from "../../hooks/useLoading.jsx";
+import useLoading from "../../customHooks/useLoading.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { modalActions } from "../../store/modal-slice.js";
 import Modal from "../UI/Modal.jsx";
@@ -41,8 +41,8 @@ export default function LoginForm() {
         const token = "Bearer " + response.data.token;
         const user = response.data.user;
         console.log(user,JSON.stringify(user));
-        localStorage.setItem("token", token);
-        localStorage.setItem("user", JSON.stringify(user));
+        sessionStorage.setItem("token", token);
+        sessionStorage.setItem("user", JSON.stringify(user));
         navigate(`/${user.fullName}`);
       }
 
@@ -83,7 +83,7 @@ export default function LoginForm() {
       <h1>Failed To Login</h1>
       <p>Invalid Password or Username</p>
       <div className="modal-action p-2">
-        <Button className='float-end button-primary px-4 py-2 rounded-lg' onClick={closeModal}>Close</Button>
+        <Button className='float-end button-primary px-4 py-2 rounded-lg' onClick={closeModal} type="button">Close</Button>
       </div>
     </Modal>
       <header className="mb-5">

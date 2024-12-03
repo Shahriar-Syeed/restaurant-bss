@@ -19,7 +19,7 @@ const HEADING = [
   { id: "tableNumber", label: "Table Number" },
   { id: "tableSeats", label: "Table Seats" },
   { id: "employees", label: "Employees" },
-  { id: "bookingStatus", label: "BookingStatus" },
+  { id: "bookingStatus", label: "Booking Status" },
   { id: "action", label: "Action" },
 ];
 
@@ -46,7 +46,6 @@ export default function EmployeeTablesListPage() {
     dispatch(getEmployeeTables(pageNumber, itemsPerPage));
     // dispatch(getAssignEmployeeAndTableDetails());
   }, [pageNumber, itemsPerPage, dispatch]);
-  console.log('ohyihnihihnikhih',employeeTablesDataTable.data);
   function handleDelete(id) {
     dispatch(deleteEmployeeTable(id));
   }
@@ -60,6 +59,7 @@ export default function EmployeeTablesListPage() {
           <div className="modal-action p-2">
             <Button
               className="float-end button-primary px-4 py-2 rounded-lg"
+              type="button"
               onClick={closeModal}
             >
               Close
@@ -67,24 +67,24 @@ export default function EmployeeTablesListPage() {
           </div>
         </Modal>
       )}
-      {isLoading && <Loading />}
+      {isLoading && <Loading fullHeightWidth />}
       <PageHeader
         title="All Table List"
         buttonLabel="ADD TABLE"
         buttonOnClick={() =>
-          navigate("/admin/tables/add-table")
+          navigate("add-table")
         }
       />
-      <div className="overflow-x-auto shadow-md sm:rounded-t-lg">
+      <div className="shadow-md sm:rounded-t-lg">
         <table className="w-full text-left rtl:text-right text-gray-900 text-xs sm:text-sm ">
-          <thead className="text-xs text-primary uppercase bg-gray-50">
+          <thead className="text-xs text-primary uppercase bg-gray-50 hidden sm:table-header-group">
             <tr>
               {HEADING?.map((heading) => (
                 <HeadTable key={heading.id}>{heading.label}</HeadTable>
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="block sm:table-row-group text-center sm:text-start">
             {employeeTablesDataTable?.data?.map((row) => (
               <RowTableList
                 key={row.id}

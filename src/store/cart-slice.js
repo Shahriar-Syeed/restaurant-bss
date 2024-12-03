@@ -5,15 +5,18 @@ const initialCart = {
     items: [],
   },
   selectedTableId: null,
+  selectedTableNumber: null,
+  success: false,
   loading: false,
   error: null,
+  showCartDrawer: false,
 };
 
 const cartSlice = createSlice({
   name: "cart",
   initialState: initialCart,
   reducers: {
-    createCartItem(state, action) {
+    setCartItem(state, action) {
       state.cartItem = action.payload;
     },
     setSelectedTableId(state, action) {
@@ -21,11 +24,22 @@ const cartSlice = createSlice({
 
         state.selectedTableId=action.payload ;
         state.cartItem = { ...state.cartItem, tableId: action.payload };
+      }else if(action.payload===null){
+        state.selectedTableId = null;
+        state.cartItem.tableId && delete state.cartItem.tableId;
       }else{        
         state.selectedTableId = null;
         delete state.cartItem.tableId;
       } 
 
+    },
+    setSelectedTableNumber(state, action) { 
+      if(state.selectedTableNumber === action.payload) {
+        state.selectedTableNumber = null;
+      }
+      else{
+        state.selectedTableNumber = action.payload;
+      }       
     },
     removeTableIdInCart(state) {
       delete state.cartItem.tableId;
@@ -52,7 +66,7 @@ const cartSlice = createSlice({
             ...state.cartItem.items,
             {
               ...action.payload,
-              foodPackageId: 0,
+              foodPackageId: null,
               quantity: 1,
               totalPrice: action.payload.unitPrice,
             },
@@ -60,13 +74,13 @@ const cartSlice = createSlice({
         };
       }
       state.cartItem.amount = state.cartItem.items.reduce(
-        (totalAmount, totalPriceEachItem) => totalAmount + totalPriceEachItem,
+        (totalAmount, totalPriceEachItem) => totalAmount + totalPriceEachItem.totalPrice,
         0
       );
     },
     increaseFoodQuantityInCart(state, action) {
       const existingItemIndex = state.cartItem.items.findIndex(
-        (item) => item.foodId === action.payload.foodId
+        (item) => item.foodId === action.payload
       );
 
       if (existingItemIndex !== -1) {
@@ -80,13 +94,13 @@ const cartSlice = createSlice({
         state.cartItem.items[existingItemIndex] = updatedItem;
       }
       state.cartItem.amount = state.cartItem.items.reduce(
-        (totalAmount, totalPriceEachItem) => totalAmount + totalPriceEachItem,
+        (totalAmount, totalPriceEachItem) => totalAmount + totalPriceEachItem.totalPrice,
         0
       );
     },
     decreaseFoodQuantityInCart(state, action) {
       const existingItemIndex = state.cartItem.items.findIndex(
-        (item) => item.foodId === action.payload.foodId
+        (item) => item.foodId === action.payload
       );
 
       if (
@@ -103,21 +117,21 @@ const cartSlice = createSlice({
         state.cartItem.items[existingItemIndex] = updatedItem;
       } else {
         state.cartItem.items = state.cartItem.items.filter(
-          (item, index) =>
-            item[index] !== state.cartItem.items[existingItemIndex]
+          (item) =>
+            item !== state.cartItem.items[existingItemIndex]
         );
       }
       state.cartItem.amount = state.cartItem.items.reduce(
-        (totalAmount, totalPriceEachItem) => totalAmount + totalPriceEachItem,
+        (totalAmount, totalPriceEachItem) => totalAmount + totalPriceEachItem.totalPrice,
         0
       );
     },
     removeFoodInCart(state, action) {
       state.cartItem.items = state.cartItem.items.filter(
-        (item) => item.foodId !== action.payload.foodId
+        (item) => item.foodId !== action.payload
       );
       state.cartItem.amount = state.cartItem.items.reduce(
-        (totalAmount, totalPriceEachItem) => totalAmount + totalPriceEachItem,
+        (totalAmount, totalPriceEachItem) => totalAmount + totalPriceEachItem.totalPrice,
         0
       );
     },
@@ -126,6 +140,15 @@ const cartSlice = createSlice({
     },
     errorMessage(state, action) {
       state.error = action.payload;
+    },
+    setCartDrawer(state){
+      state.showCartDrawer = state.payload;
+    },
+    toggleCartDrawer(state){
+      state.showCartDrawer = !state.showCartDrawer;
+    },
+    setSuccess(state, action){
+      state.success = action.payload;
     },
   },
 });
