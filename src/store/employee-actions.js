@@ -1,46 +1,45 @@
-import axios from "axios";
 import { employeeActions } from "./employee-slice";
 import { modalActions } from "./modal-slice";
+import { api } from "./axiosInstance";
 
 export const getEmployees = (page, perPage) => {
   return async (dispatch) => {
-    dispatch(employeeActions.loading(true));
+    dispatch(employeeActions.loading(true)); 
     try {
-      const response = await axios.get(
-        `https://restaurantapi.bssoln.com/api/Employee/datatable?Page=${page}&Per_Page=${perPage}`
+      const response = await api.get(
+        `Employee/datatable?Page=${page}&Per_Page=${perPage}`
       );
-      if(response.status === 200){
+      if (response.status === 200) {
         dispatch(employeeActions.getEmployeesDataTable(response.data));
         dispatch(employeeActions.loading(false));
       }
     } catch (error) {
       dispatch(employeeActions.loading(false));
-      console.log(error);
-      dispatch(modalActions.id("employee-list-fail"));
+      dispatch(modalActions.id("Employees list get fail"));
       dispatch(employeeActions.errorMessage(error.message));
-      dispatch(modalActions.open());
-      console.log(error);
+      dispatch(modalActions.open()); //
+      console.error(error);
+
       setTimeout(() => {
-        dispatch(modalActions.close());
+        dispatch(modalActions.id(null)); 
+        dispatch(modalActions.close()); 
       }, 3000);
     }
   };
 };
 
-
 export const deleteEmployee = (employeeId) => {
   return async (dispatch) => {
     dispatch(employeeActions.loading(true));
     try {
-      const res = await axios.delete(
-        `https://restaurantapi.bssoln.com/api/Employee/delete/${employeeId}`
-      );
+      const res = await api.delete(`Employee/delete/${employeeId}`);
 
       if (res.status === 204) {
         dispatch(employeeActions.removeEmployee(employeeId));
       }
       dispatch(employeeActions.loading(false));
     } catch (error) {
+      dispatch(modalActions.id("Delete Employee Fail."));
       dispatch(employeeActions.loading(false));
       dispatch(employeeActions.errorMessage(error.message));
       dispatch(modalActions.open());
@@ -66,10 +65,7 @@ export const createEmployee = (formData) => {
     };
     console.log("updatedData", updatedData);
     try {
-      const response = await axios.post(
-        "https://restaurantapi.bssoln.com/api/Employee/create",
-        updatedData
-      );
+      const response = await api.post("Employee/create", updatedData);
       dispatch(employeeActions.setStatus(response.status));
       console.log("createResult", response);
       if (response.status === 200) {
@@ -95,9 +91,8 @@ export const createEmployee = (formData) => {
 export const editEmployeeDesignation = (id, data) => {
   return async (dispatch) => {
     dispatch(employeeActions.loading(true));
-    console.log("data", data);
     try {
-      const response = await axios.put(
+      const response = await api.put(
         `https://restaurantapi.bssoln.com/api/Employee/update/${id}`,
         { designation: data }
       );
@@ -113,11 +108,13 @@ export const editEmployeeDesignation = (id, data) => {
         return Promise.resolve("success");
       }
     } catch (error) {
+      dispatch(modalActions.id("Edit Employee Fail"));
       dispatch(employeeActions.errorMessage(error.message));
       dispatch(modalActions.open());
       console.log(error);
       setTimeout(() => {
         dispatch(modalActions.close());
+        dispatch(modalActions.id(null));
       }, 3000);
     }
   };

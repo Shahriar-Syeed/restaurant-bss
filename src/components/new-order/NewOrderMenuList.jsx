@@ -1,30 +1,28 @@
 import { useSelector } from "react-redux";
 import Button from "../UI/Button";
 import defaultImage from "../../assets/default-image-preview.png";
+import { forwardRef } from "react";
+import apiUrl from "../../apiUrl/ApiUrl";
 
-export default function NewOrderMenuList({
-  menuItem,
-  toggleCart,
-  addFoodItemInCart,
-  ...props
-}) {
+const NewOrderMenuList = forwardRef(function NewOrderMenuList(
+  { menuItem, toggleCart, addFoodItemInCart, ...props },
+  tableRef
+) {
   const cartItems = useSelector((state) => state.cart.cartItem);
   return (
-    <div
-      {...props}
-    >
+    <div {...props} ref={tableRef}>
       <div className="lg:row-span-4 place-self-center max-w-52">
         <img
           src={
             menuItem.image
-              ? `https://restaurantapi.bssoln.com/images/food/${menuItem.image}`
+              ? `${apiUrl.getFoodImage}${menuItem.image}`
               : defaultImage
           }
           alt={menuItem.name}
           className="w-full object-cover rounded-lg"
         />
       </div>
-      <h2 className="text-2xl lg:col-start-2 lg:col-end-5 font-bold capitalize">
+      <h2 className="lg:text-2xl md:text-xl sm:text-lg text-md lg:col-start-2 lg:col-end-5 font-bold capitalize">
         {menuItem.name}
       </h2>
       <p className="lg:col-start-2 lg:col-end-5 max-h-16 line-clamp-3 text-ellipsis ">
@@ -49,10 +47,10 @@ export default function NewOrderMenuList({
             </span>
           )}
         </h3>
-        <div className="flex gap-1 flex-wrap">
+        <div className="flex gap-1 flex-wrap items-center justify-center sm:items-start sm:justify-start">
           {cartItems.items.some((item) => item.foodId === menuItem.id) && (
             <Button
-              className="button button__outline--primary py-2 px-4 text-white rounded"
+              className="button button__outline--primary sm:py-2 sm:px-4 py-1.5 px-3 text-white rounded-md order-2"
               type="button"
               onClick={toggleCart}
             >
@@ -60,7 +58,7 @@ export default function NewOrderMenuList({
             </Button>
           )}
           <Button
-            className="button button-primary py-2 px-4 text-white rounded"
+            className="button button-primary sm:py-2 sm:px-4 py-1.5 px-3 text-white rounded-md sm:order-3"
             type="button"
             onClick={() => addFoodItemInCart(menuItem)}
           >
@@ -70,4 +68,6 @@ export default function NewOrderMenuList({
       </div>
     </div>
   );
-}
+});
+
+export default NewOrderMenuList;

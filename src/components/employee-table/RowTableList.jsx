@@ -61,35 +61,21 @@ export default function RowEmployeeTableList({
   }
   return (
     <>
-      {errorMessage && modalTableId === "employeeTableError" && (
-        <Modal open={isOpen}>
-          <h1>Failed!</h1>
-          {errorMessage ? <p>{errorMessage}</p> : <p>Something went wrong</p>}
-          <div className="modal-action p-2">
-            <Button
-              className="float-end button-primary px-4 py-2 rounded-lg"
-              onClick={closeNormalModal}
-              type="button"
-            >
-              Close
-            </Button>
-          </div>
-        </Modal>
-      )}
+
       {modalTableId?.id === tableInfoData.id && (
         <Modal open={isOpen}>
           <h1>Confirmation!</h1>
           <p>Are you sure you want to remove this employee from this table?</p>
           <div className="flex flex-wrap justify-end gap-1 p-2">
             <Button
-              className="button__outline--primary px-4 py-2 rounded-lg"
+              className="button__outline--primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
               onClick={closeNormalModal}
               type="button"
             >
               Close
             </Button>
             <Button
-              className="button-primary px-4 py-2 rounded-lg"
+              className="button-primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg border-solid border-2 border-primary"
               onClick={() => handleDeleteEmployeeFromTable()}
               type="button"
             >
@@ -105,14 +91,14 @@ export default function RowEmployeeTableList({
             <p>Are you sure you want to remove this table?</p>
             <div className="flex flex-wrap justify-end gap-1 p-2">
               <Button
-                className="button__outline--primary px-4 py-2 rounded-lg"
+                className="button__outline--primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
                 onClick={closeNormalModal}
                 type="button"
               >
                 Close
               </Button>
               <Button
-                className="button-primary px-4 py-2 rounded-lg"
+                className="button-primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
                 onClick={() => handleWholeTableDelete(modalTableId.id)}
                 type="button"
               >

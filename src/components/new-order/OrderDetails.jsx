@@ -6,6 +6,7 @@ import {
   removeFoodItem,
   subtractFoodQuantity,
 } from "../../store/cart-actions";
+import apiUrl from "../../apiUrl/ApiUrl";
 
 export default function OrderDetails({ cartItem }) {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ export default function OrderDetails({ cartItem }) {
         <img
           src={
             cartItem.foodImage !== ""
-              ? `https://restaurantapi.bssoln.com/images/food/${cartItem.foodImage}`
+              ? `${apiUrl.getFoodImage}${cartItem.foodImage}`
               : defaultImage
           }
           alt=""

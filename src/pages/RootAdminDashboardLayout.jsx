@@ -20,7 +20,7 @@ export default function RootAdminDashboardLayout() {
           </div>
         </Navbar>
         <div
-          className="xl:p-10 lg:p-8 md:p-6 sm:p-4 p-2 pb-1 xl:pb-4 lg:pb-3 md:pb-2 sm:pb-1 relative sm:h-[calc(100svh-5rem)] es:h-[calc(100svh-8.7rem)] h-[calc(100svh-7.7rem)] overflow-y-auto [&::-webkit-scrollbar]:w-2
+          className="xl:p-10 lg:p-8 md:p-6 sm:p-4 p-2 pb-1 xl:pb-4 lg:pb-3 md:pb-2 sm:pb-1 relative sm:h-[calc(100svh-5rem)] es:h-[calc(100svh-8.7rem)] h-[calc(100svh-7.1rem)] overflow-y-auto [&::-webkit-scrollbar]:w-2
           [&::-webkit-scrollbar-track]:bg-neutral-200
           [&::-webkit-scrollbar-thumb]:bg-neutral-700 bg--page"
         >

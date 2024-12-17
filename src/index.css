@@ -49,6 +49,9 @@ input {
   background-color: #cc080b;
   color: #fff;
 }
+.button-primary{
+  border: #cc080b solid 2px;
+}
 
 .button-primary--dark,
 .bg-primary--dark {
@@ -58,12 +61,12 @@ input {
 
 .button-primary:is(:hover, :active) {
   background-color: rgb(155, 6, 8);
+  border-color: rgb(155, 6, 8);
 }
 
 .button__outline--primary {
   border: #cc080b solid 2px;
   color: #cc080b;
-  padding: 8px 16px;
   fill: #cc080b;
   background: #fff;
   text-align: center;

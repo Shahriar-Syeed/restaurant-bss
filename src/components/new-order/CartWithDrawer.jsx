@@ -5,7 +5,6 @@ import { createOrder, toggleCartDrawer } from "../../store/cart-actions.js";
 import Loading from "../loader/Loading.jsx";
 import EmptyCartSvg from "../svg/EmptyCartSvg.jsx";
 import CloseIcon from "../svg/CloseIcon.jsx";
-import { getOrder } from "../../store/order-actions.js";
 
 export default function CartWithDrawer() {
   const dispatch = useDispatch();
@@ -21,15 +20,13 @@ export default function CartWithDrawer() {
     dispatch(toggleCartDrawer());
   }
   function sentOrder(orders) {
-    if (window.confirm("Do you really want to order?")) {
-      const updatedOrders = {
-        ...orders,
-        items: orders.items.map(({ foodImage, foodName, ...rest }) => rest),
-        orderNumber: new Date().toISOString(),
-        phoneNumber: "",
-      };
-      dispatch(createOrder(updatedOrders));
-    }
+    const updatedOrders = {
+      ...orders,
+      items: orders.items.map(({ foodImage, foodName, ...rest }) => rest),
+      orderNumber: new Date().toISOString(),
+      phoneNumber: "",
+    };
+    dispatch(createOrder(updatedOrders));
   }
   return (
     <>

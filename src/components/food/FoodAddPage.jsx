@@ -50,7 +50,6 @@ export default function FoodAddPage() {
   const selectedOption = useSelector(
     (state) => state.customSelect.selectedOption
   );
-  const errorMessage = useSelector((state) => state.foods.error);
   const previewImage = useSelector((state) => state.foods.preview);
 
   const discountOption = [
@@ -144,21 +143,6 @@ export default function FoodAddPage() {
 
   return (
     <>
-      {errorMessage && modalId === "foodAddFail" && (
-        <Modal open={isOpen} onClose={closeModal}>
-          <h1>Failed!</h1>
-          {errorMessage ? <p>{errorMessage}</p> : <p>Failed to add food!</p>}
-          <div className="modal-action p-2">
-            <Button
-              className="float-end button-primary px-4 py-2 rounded-lg"
-              onClick={closeModal}
-              type="button"
-            >
-              Close
-            </Button>
-          </div>
-        </Modal>
-      )}
       <PageHeader
         title="Add Food Item"
         buttonLabel="BACK"
@@ -173,14 +157,14 @@ export default function FoodAddPage() {
 
             <div className="modal-action p-2 flex justify-end gap-2 flex-wrap">
               <Button
-                className="button__outline--primary px-4 py-2 rounded-lg"
+                className="button__outline--primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
                 onClick={closeModal}
                 type="button"
               >
                 Cancel
               </Button>
               <Button
-                className="button-primary px-4 py-2 rounded-lg"
+                className="button-primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
                 type="button"
                 onClick={handleSubmit}
               >
@@ -189,7 +173,7 @@ export default function FoodAddPage() {
             </div>
           </Modal>
         )}
-        <div className="grid lg:grid-cols-12 lg:gap-4 gap-4 bg-white xl:p-10 lg:p-8 md:p-6 sm:p-4 p-3 rounded">
+        <div className="grid lg:grid-cols-12 lg:gap-4 gap-5 bg-white xl:p-10 lg:p-8 md:p-6 sm:p-4 p-3 rounded">
           <div
             className="lg:col-start-9 lg:col-end-13 lg:row-start-1 lg:row-span-4 border-dashed border border-gray-200 hover:border-gray-400 relative min-h-36 rounded"
             onDragOver={(e) => e.preventDefault()}
@@ -199,8 +183,7 @@ export default function FoodAddPage() {
               <Input
                 type="file"
                 hidden
-                id="foodImage"
-                name="image"
+                id="image"
                 labelClass="absolute top-0 bottom-0 left-0 right-0 opacity-0 z-40 cursor-pointer"
                 onChange={onSelectFile}
               >
@@ -216,8 +199,7 @@ export default function FoodAddPage() {
           </div>
           <div className="lg:col-start-1 lg:col-end-9 lg:row-start-1">
             <InputFloating
-              id="FoodName"
-              name="name"
+              id="name"
               onChange={handleChange}
               onBlur={handleBlur}
             >
@@ -231,8 +213,7 @@ export default function FoodAddPage() {
           </div>
           <div className="lg:col-start-1 lg:col-end-9 row-start-2 row-end-5">
             <TextAreaFloating
-              id="descriptionOfFood"
-              name="description"
+              id="description"
               onChange={handleChange}
               onBlur={handleBlur}
             >
@@ -246,8 +227,7 @@ export default function FoodAddPage() {
           </div>
           <div className="lg:col-start-1 lg:col-end-4 lg:row-start-5">
             <InputFloating
-              id="foodPrice"
-              name="price"
+              id="price"
               onChange={(e) => {
                 setPrice(e.target.value);
                 handleChange(e);
@@ -266,8 +246,7 @@ export default function FoodAddPage() {
 
           <div className="lg:col-start-4 lg:col-end-7 lg:row-start-5">
             <CustomSelect
-              id="foodDiscountType"
-              name="discountType"
+              id="discountType"
               label="Select Discount Type"
               options={discountOption}
               onChanged={(e) => handleDiscountSelect(e)}
@@ -277,8 +256,7 @@ export default function FoodAddPage() {
 
           <div className="lg:col-start-7 lg:col-end-10 lg:row-start-5">
             <InputFloating
-              id="foodDiscount"
-              name="discount"
+              id="discount"
               type="number"
               disabled={disableDiscountFields}
               value={discount}
@@ -290,7 +268,6 @@ export default function FoodAddPage() {
 
           <div className="lg:col-start-10 lg:col-end-13 lg:row-start-5">
             <InputFloating
-              id="foodDiscountPrice"
               name="discountPrice"
               type="number"
               disabled={true}

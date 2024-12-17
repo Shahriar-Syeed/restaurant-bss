@@ -1,10 +1,17 @@
-const validateEmployeeEntry = (name, value) => {
+const validateEmployeeEntry = (name, value, formData) => {
   let error = "";
 
   switch (name) {
     case "firstName":
       if (!value.trim()) {
         error = "First name is required.";
+      } else if (value.trim().length < 2) {
+        error = "Must be 2 characters.";
+      } 
+      break;
+    case "userName":
+      if (!value.trim()) {
+        error = "User name is required.";
       } else if (value.trim().length < 2) {
         error = "Must be 2 characters.";
       } else if (value.trim().length > 10) {
@@ -118,6 +125,20 @@ const validateEmployeeEntry = (name, value) => {
         error = "NID is required.";
       } else if (!nidRegex.test(value)) {
         error = "10 or 17 digits.";
+      }
+      break;
+    case "password":
+      const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+      if (!value.trim()) {
+        error = "Password is required.";
+      } else if (!passwordRegex.test(value)) {
+        error = "8 chars include 1 letter & 1 number.";
+      }
+      break;
+    case "confirmPassword":
+      
+      if (value !== formData?.password) {
+        error = "Passwords do not match.";
       }
       break;
 

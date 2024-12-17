@@ -1,6 +1,6 @@
 import Logo from "../assets/logo-icon.png";
 
-export default function Navbar({ children }) {
+export default function Navbar({ children, className }) {
   return (
     <>
       <nav className="bg-primary top-0 z-20">
@@ -13,7 +13,7 @@ export default function Navbar({ children }) {
               BSS RESTAURANT
             </h2>
           </div>
-          <div className="" id="navbar-default">
+          <div className={className} id="navbar-default">
             {children}
           </div>
         </div>

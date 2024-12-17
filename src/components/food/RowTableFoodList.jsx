@@ -3,6 +3,7 @@ import Button from "../UI/Button";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "../UI/Modal";
 import { modalActions } from "../../store/modal-slice";
+import apiUrl from "../../apiUrl/ApiUrl";
 
 export default function RowTableFoodList({ food, deleteFood }) {
   const dispatch = useDispatch();
@@ -30,14 +31,14 @@ export default function RowTableFoodList({ food, deleteFood }) {
           <h1>Do you want to delete this ?</h1>
           <div className="flex flex-wrap justify-end gap-2 p-2">
             <Button
-              className="button__outline-primary px-4 py-2 rounded-lg"
+              className="button__outline-primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
               type="button"
               onClick={closeModal}
             >
               Cancel
             </Button>
             <Button
-              className="button-primary px-4 py-2 rounded-lg"
+              className="button-primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
               type="button"
               onClick={deleteThisFood}
             >
@@ -55,7 +56,7 @@ export default function RowTableFoodList({ food, deleteFood }) {
             <img
               src={
                 food.image
-                  ? `https://restaurantapi.bssoln.com/images/food/${food.image}`
+                  ? `${apiUrl.getFoodImage}${food.image}`
                   : "../assets/default-image-preview.png"
               }
               alt={food.name}

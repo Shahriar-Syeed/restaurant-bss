@@ -12,7 +12,7 @@ export default function PageHeader({
       </h1>
       {buttonLabel && (
         <Button
-          className="button__outline--primary rounded-md text-sm leading-none"
+          className="button__outline--primary rounded-md text-sm leading-none sm:py-2 sm:px-4 py-1.5 px-3"
           onClick={buttonOnClick}
           type='button'
         >

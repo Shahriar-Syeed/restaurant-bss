@@ -1,10 +1,6 @@
-import { useNavigate } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
-import Modal from "../components/UI/Modal";
 import { useDispatch, useSelector } from "react-redux";
-import Button from "../components/UI/Button";
-import { modalActions } from "../store/modal-slice";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 import { getFoods } from "../store/food-actions";
 import { getEmployeeTables } from "../store/employee-tables-actions";
 import Loading from "../components/loader/Loading";
@@ -19,10 +15,6 @@ import NewOrderTableList from "../components/new-order/NewOrderTableList";
 import usePageItems from "../customHooks/usePagesItems";
 
 export default function NewOrderPage() {
-  // const [tableCount, setTableCount] = useState(10);
-  // const [menuCount, setMenuCount] = useState(10);
-
-  // const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const tableInfo = useSelector(
@@ -32,13 +24,6 @@ export default function NewOrderPage() {
 
   const tableLoading = useSelector((state) => state.employeeTables.loading);
   const foodLoading = useSelector((state) => state.foods.loading);
-  const foodErrorMessage = useSelector((state) => state.foods.error);
-  const tableErrorMessage = useSelector((state) => state.employeeTables.error);
-  const cartErrorMessage = useSelector((state) => state.cart.error);
-  const cartSuccess = useSelector((state) => state.cart.success);
-
-  const errorModalId = useSelector((state) => state.modal.id);
-  const cartItems = useSelector((state) => state.cart.cartItem);
   const selectedTableId = useSelector((state) => state.cart.selectedTableId);
 
   const { itemsPerPage: tableCount, lastElementRef: lastTableElementRef } =
@@ -47,7 +32,6 @@ export default function NewOrderPage() {
     usePageItems(6, 3, foodInfo, foodLoading);
 
   useEffect(() => {
-
     if (tableCount > 0) {
       dispatch(getEmployeeTables(1, tableCount));
     }
@@ -66,54 +50,13 @@ export default function NewOrderPage() {
     const foodUnitPrice =
       food.discountPrice === 0 ? food.price : food.discountPrice;
     dispatch(addFood(food.id, foodUnitPrice, food.name, food.image));
-    console.log(
-      "cartItems",
-      cartItems,
-      JSON.stringify(cartItems),
-      "food",
-      food
-    );
   }
   function toggleCart() {
     dispatch(toggleCartDrawer());
   }
-  // Modal
 
-  const isOpen = useSelector((state) => state.modal.open);
-  function closeModal() {
-    dispatch(modalActions.close());
-  }
   return (
     <>
-      {(((foodErrorMessage || tableErrorMessage || cartErrorMessage) &&
-        (errorModalId === "foodList" ||
-          errorModalId === "tableList" ||
-          errorModalId === "cart-error")) ||
-        cartSuccess) && (
-        <Modal open={isOpen} onClose={closeModal}>
-          {cartSuccess ? (
-            <p className="font-bold text-green-800 lg:text-xl md:text-lg sm:text-md">
-              Order Create Success!
-            </p>
-          ) : (
-            <p>
-              {foodErrorMessage ||
-                tableErrorMessage ||
-                cartErrorMessage ||
-                `Something went wrong! ${errorModalId}`}
-            </p>
-          )}
-          <div className="modal-action p-2">
-            <Button
-              className="float-end button-primary px-4 py-2 rounded-lg"
-              type="button"
-              onClick={closeModal}
-            >
-              Close
-            </Button>
-          </div>
-        </Modal>
-      )}
       {(tableLoading || foodLoading) && <Loading fullHeightWidth />}
       <PageHeader title="Order Food" />
       <div className="grid lg:grid-cols-4 lg:gap-4 md:gap-3.5 sm:gap-3 gap-2.5">
@@ -124,28 +67,21 @@ export default function NewOrderPage() {
             </h2>
           </header>
           <div className="flex lg:flex-col gap-3 viewport-hight overflow-x-auto lg:overflow-x-visible lg:overflow-y-auto lg:[&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar]:h-2 lg:[&::-webkit-scrollbar]:h-auto [&::-webkit-scrollbar-track]:bg-gray-300  [&::-webkit-scrollbar-thumb]:bg-gray-700 [&::-webkit-scrollbar-thumb]:rounded px-2 lg:px-0 pb-3 lg:pb-0">
-            {tableInfo?.data?.map((table, tableIndex) =>
-              tableInfo.data.length !== tableIndex + 1 ? (
-                <NewOrderTableList
-                  className={`card flex flex-col lg:flex-row gap-2 items-center justify-evenly py-3 px-3 lg:px-0 rounded-lg cursor-pointer hover:bg-red-600/90 hover:text-white lg:border-dotted lg:border-b-2 lg:border-collapse shadow-md ${
-                    selectedTableId === table.id && "bg-red-600/95 text-white"
-                  }`}
-                  table={table}
-                  key={table.id}
-                  onClick={() => handleSelection(table.id, table.tableNumber)}
-                />
-              ) : (
-                <NewOrderTableList
-                  className={`card flex flex-col lg:flex-row gap-2 items-center justify-evenly py-3 px-3 lg:px-0 rounded-lg cursor-pointer hover:bg-red-600/90 hover:text-white lg:border-dotted lg:border-b-2 lg:border-collapse shadow-md ${
-                    selectedTableId === table.id && "bg-red-600/95 text-white"
-                  }`}
-                  table={table}
-                  key={table.id}
-                  onClick={() => handleSelection(table.id, table.tableNumber)}
-                  ref={lastTableElementRef}
-                />
-              )
-            )}
+            {tableInfo?.data?.map((table, tableIndex) => (
+              <NewOrderTableList
+                className={`card flex flex-col lg:flex-row gap-2 items-center justify-evenly py-3 px-3 lg:px-0 rounded-lg cursor-pointer hover:bg-red-600/90 hover:text-white lg:border-dotted lg:border-b-2 lg:border-collapse shadow-md ${
+                  selectedTableId === table.id && "bg-red-600/95 text-white"
+                }`}
+                table={table}
+                key={table.id}
+                onClick={() => handleSelection(table.id, table.tableNumber)}
+                ref={
+                  tableInfo.data.length === tableIndex + 1
+                    ? lastTableElementRef
+                    : null
+                }
+              />
+            ))}
           </div>
         </section>
         <section className="lg:col-start-2 lg:col-end-5 p-3 bg-white rounded-lg relative">

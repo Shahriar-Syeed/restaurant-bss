@@ -1,18 +1,17 @@
 import DeleteIcon from "../svg/DeleteIcon.jsx";
 import Button from "../UI/Button.jsx";
-import defaultImage from "../../assets/default-image-preview.png" ;
 import EditIcon from "../svg/EditIcon.jsx";
 import OrderICardFoodItems from "./OrderICardFoodItems.jsx";
+import { forwardRef } from "react";
 
-export default function OrderCard({
-  eachOrderItem,
-  deleteOrder,
-  editStatus,
-  ...props
-}) {
+const OrderCard = forwardRef(function OrderCard(
+  { eachOrderItem, deleteOrder, editStatus, ...props },
+  orderRef
+) {
   return (
     <div
       {...props}
+      ref={orderRef}
       className="rounded-lg border-2 mx-auto xl:p-10 lg:p-6 md:p-5 sm:p-4 p-3 shadow-lg bg-white sm:w-[min(100%,_25rem)] w-[min(90%,_25rem)]"
     >
       <div className="flex justify-between mb-3 gap-0.5">
@@ -39,33 +38,11 @@ export default function OrderCard({
           [&::-webkit-scrollbar-thumb]:bg-red-300 [&::-webkit-scrollbar-thumb]:rounded-md [&::-webkit-scrollbar-thumb]:bg-clip-padding"
       >
         {eachOrderItem?.orderItems?.map((item) => (
-          // <div key={item.id} className="flex gap-3 items-center mb-2">
-          //   <div className="sm:w-12 w-10">
-          //     <img
-          //       src={
-          //         item.food.image === ""
-          //           ? defaultImage
-          //           : `https://restaurantapi.bssoln.com/images/food/${item.food.image}`
-          //       }
-          //       alt="food image"
-          //       className="w-full object-cover rounded-lg"
-          //     />
-          //   </div>
-          //   <div className="flex-grow">
-          //     <h4 className="text-md sm:text-lg font-bold mb-1">
-          //       {item.food.name}
-          //     </h4>
-          //     <p className="flex gap-1 flex-wrap pe-2 justify-between">
-          //       <span className="text-green-900 font-bold">
-          //         {item.totalPrice}৳
-          //       </span>
-          //       <span>
-          //         Qty: <strong>{item.quantity}</strong>
-          //       </span>
-          //     </p>
-          //   </div>
-          // </div>
-          <OrderICardFoodItems key={item.id} item={item} className="flex gap-3 items-center mb-2" />
+          <OrderICardFoodItems
+            key={item.id}
+            item={item}
+            className="flex gap-3 items-center mb-2"
+          />
         ))}
       </div>
 
@@ -107,9 +84,10 @@ export default function OrderCard({
             editStatus(eachOrderItem.id, eachOrderItem.orderNumber)
           }
         >
-         <EditIcon className="p-0.5 rounded shadow-sm stroke-green-700 bg-slate-50 hover:stroke-green-900 w-7 hover:bg-slate-100" />
+          <EditIcon className="p-0.5 rounded shadow-sm stroke-green-700 bg-slate-50 hover:stroke-green-900 w-7 hover:bg-slate-100" />
         </Button>
       </div>
     </div>
   );
-}
+});
+export default OrderCard;

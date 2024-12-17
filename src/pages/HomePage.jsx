@@ -29,23 +29,61 @@ export default function HomePage() {
   }, []);
   return (
     <>
-      <div className="grid md:grid-cols-2 gap-6 ">
-        <Link to='../employee/employee-list' className="bg-white rounded-lg p-4 shadow-xl border-t-4 border-primary hover:shadow-2xl hover:bg-stone-50 min-h-52">
-          <EmployeesGraph graphClassName="max-w-full max-h-40" iconClassName="w-9 text-primary p-2 bg-red-600/25 rounded-lg" totalEmployees={employeesData.length}/>
+      <div className="grid md:grid-cols-2 gap-6 sm:gap-7">
+        <Link
+          to="../employee/employee-list"
+          className="bg-white rounded-lg  p-4 sm:p-6 lg:p-7 xl:p-8 2xl:p-9 shadow-xl border-t-4 border-primary hover:shadow-2xl hover:bg-stone-50 min-h-52"
+        >
+          <EmployeesGraph
+            graphClassName="max-w-full max-h-40"
+            iconClassName="w-9 text-primary p-2 bg-red-600/25 rounded-lg"
+            totalEmployees={employeesData.length}
+          />
         </Link>
-        <Link to='../tables' className="bg-white rounded-lg p-4 shadow-xl border-t-4 border-primary hover:shadow-2xl hover:bg-stone-50 " >
-          <TableGraph graphClassName="max-w-full max-h-40" iconClassName="w-9 text-primary p-2 bg-red-600/25 rounded-lg" totalTables={tablesData.length} />
+        <Link
+          to="../tables"
+          className="bg-white rounded-lg p-4 sm:p-6 lg:p-7 xl:p-8 2xl:p-9 shadow-xl border-t-4 border-primary hover:shadow-2xl hover:bg-stone-50 "
+        >
+          <TableGraph
+            graphClassName="max-w-full max-h-40"
+            iconClassName="w-9 text-primary p-2 bg-red-600/25 rounded-lg"
+            totalTables={tablesData.length}
+          />
         </Link>
-        <Link to='../foods' className="bg-white rounded-lg p-9 shadow-xl border-t-4 border-primary hover:shadow-2xl hover:bg-stone-50">
-          <FoodsGraph graphClassName="max-w-full max-h-40" iconClassName="w-9 text-primary p-2 bg-red-600/25 rounded-lg" totalFoods={foodsData.length} />
+        <Link
+          to="../foods"
+          className="bg-white rounded-lg  p-4 sm:p-6 lg:p-7 xl:p-8 2xl:p-9 shadow-xl border-t-4 border-primary hover:shadow-2xl hover:bg-stone-50"
+        >
+          <FoodsGraph
+            graphClassName="max-w-full max-h-40"
+            iconClassName="w-9 text-primary p-2 bg-red-600/25 rounded-lg"
+            totalFoods={foodsData.length}
+          />
         </Link>
-        <Link to='../order' className="bg-white rounded-lg p-9 shadow-xl border-t-4 border-primary hover:shadow-2xl hover:bg-stone-50" >
-          <OrdersGraph graphClassName="max-w-full max-h-40" iconClassName="w-9 text-primary p-2 bg-red-600/25 rounded-lg" totalOrders={ordersData.length} />
+        <Link
+          to="../order"
+          className="bg-white rounded-lg  p-4 sm:p-6 lg:p-7 xl:p-8 2xl:p-9 shadow-xl border-t-4 border-primary hover:shadow-2xl hover:bg-stone-50"
+        >
+          <OrdersGraph
+            graphClassName="max-w-full max-h-40"
+            iconClassName="w-9 text-primary p-2 bg-red-600/25 rounded-lg"
+            totalOrders={ordersData.length}
+          />
         </Link>
       </div>
       <div className="grid xl:grid-cols-2 gap-3 pt-4">
-        <LineGraph />
-        <BarGraph />
+        <div className="bg-white rounded-lg p-4 sm:p-6 lg:p-7 xl:p-8 2xl:p-9 shadow-xl  max-w-full max-h-96">
+          <h2 className="text-primary font-bold text-lg text-center">
+            Weekly Profit Figure
+          </h2>
+          <LineGraph graphClassName="max-w-full max-h-40" />
+        </div>
+        <div className="bg-white rounded-lg p-4 sm:p-6 lg:p-7 xl:p-8 2xl:p-9 shadow-xl  max-w-full max-h-96">
+          <h2 className="text-primary font-bold text-lg text-center">
+            Weekly Profit Figure
+          </h2>
+          <BarGraph graphClassName="max-w-full max-h-40"/>
+        </div>
       </div>
     </>
   );

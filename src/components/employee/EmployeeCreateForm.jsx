@@ -28,7 +28,7 @@ export default function EmployeeCreateForm() {
           )}
           <div className="modal-action p-2">
             <Button
-              className="float-end button-primary px-4 py-2 rounded-lg"
+              className="float-end button-primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
               onClick={closeModal}
               type="button"
             >

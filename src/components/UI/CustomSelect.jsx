@@ -7,6 +7,7 @@ const CustomSelect = ({
   options = [],
   className,
   id,
+  name,
   maximumHeight,
   onChanged,
   ...props
@@ -23,11 +24,13 @@ const CustomSelect = ({
     const handler = (e) => {
       if (!showOption.current.contains(e.target)) {
         dispatch(customSelectActions.setIsOpen(false));
+        if (!selectedOption) {
+          dispatch(customSelectActions.setIsOpen(false));
+        }
       }
     };
     document.addEventListener("mousedown", handler);
     dispatch(customSelectActions.setSelectedOption(null));
-    dispatch(customSelectActions.setIsFocused(false));
 
     return () => {
       document.removeEventListener("mousedown", handler);
@@ -45,9 +48,12 @@ const CustomSelect = ({
   const handleSelect = (option) => {
     dispatch(customSelectActions.setSelectedOption(option));
 
-    dispatch(customSelectActions.setIsOpen(false));
+    dispatch(customSelectActions.setIsOpen(false));    
 
-    dispatch(customSelectActions.setIsFocused(true));
+    if (!selectedOption) {
+      dispatch(customSelectActions.setIsFocused(true));
+    }
+
     if (onChanged) {
       onChanged(option);
     }
@@ -66,13 +72,13 @@ const CustomSelect = ({
         type="hidden"
         value={selectedOption ? selectedOption.sendingValue : 0}
         onChange={(e) => onChanged(e)}
-        name={id ?? name}
+        name={name ?? id}
         id={id ?? name}
         {...props}
       />
 
       <div
-        className={`relative border rounded cursor-pointer sm:p-3.5 p-1.5 flex items-center justify-between text-gray-900 bg-transparent border-solid appearance-none hover:border-gray-400 border-gray-200
+        className={`relative border rounded cursor-pointer sm:p-3.5 p-1.5 flex items-center justify-between text-gray-900 bg-transparent border-solid appearance-none hover:border-gray-400 border-gray-200 group focus:border-blue-900
         ${isFocused ? "border-blue-900" : "border-gray-200"}`}
         onClick={handleToggle}
         onBlur={handleBlur}
@@ -81,11 +87,11 @@ const CustomSelect = ({
         tabIndex={0}
       >
         <label
-          className={`absolute ps-1.5 text-xs sm:text-sm md:text-base transform pointer-events-none transition-all duration-300
+          className={`absolute ps-0.5 text-xs sm:text-sm md:text-base transform pointer-events-none transition-all duration-300 text-gray-500 group-focus:text-blue-500 group-focus-within:text-blue-500
           ${
             isFocused
-              ? "scale-75 top-2 bg-white text-blue-500 sm:-translate-x-4 -translate-y-3.5 origin-[0] z-10"
-              : "text-gray-500 top-1/2 -translate-y-1/2 rtl:translate-x-1/4 rtl:left-auto"
+              ? "scale-75 top-2 bg-white sm:-translate-x-2 sm:-translate-y-5 -translate-y-3.5 origin-[0] z-10"
+              : "top-1/2 -translate-y-1/2 rtl:translate-x-1/4 rtl:left-auto"
           }`}
         >
           {label}
@@ -94,11 +100,7 @@ const CustomSelect = ({
         <span
           className={`flex-1 max-h-16 overflow-y-auto [&::-webkit-scrollbar]:w-2
           [&::-webkit-scrollbar-track]:bg-neutral-700
-          [&::-webkit-scrollbar-thumb]:bg-neutral-300 ${
-            selectedOption
-              ? "text-xsm sm:text-sm md:text-base"
-              : "text-gray-400 "
-          }`}
+          [&::-webkit-scrollbar-thumb]:bg-neutral-300 text-xs sm:text-sm md:text-base text-gray-600`}
         >
           {selectedOption?.label}
         </span>

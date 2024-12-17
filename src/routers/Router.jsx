@@ -19,27 +19,32 @@ import FoodAddPage from "../components/food/FoodAddPage.jsx";
 import FoodEditPage from "../components/food/FoodEditPage.jsx";
 import NewOrderPage from "../pages/NewOrderPage.jsx";
 import OrderListPage from "../pages/OrderListPage.jsx";
+import RegistrationPage from "../pages/RegistrationPage.jsx";
 
 const requireAuth = async () => {
   const user = await JSON.parse(sessionStorage.getItem("user"));
-  const token = sessionStorage.getItem("token");
-
-  // Check if user is Admin and token starts with "Bearer"
-  if (user?.id === "eb87aaa2-bf85-48d5-56a4-08d906dd12b1" && token?.startsWith("Bearer")) {
-    return null; // Allow access
+  const saveToken = sessionStorage.getItem("token");
+  if (
+    user?.id === "eb87aaa2-bf85-48d5-56a4-08d906dd12b1" &&
+    saveToken?.startsWith("Bearer")
+  ) {
+    return null;
   } else {
-    return redirect("/login"); 
+    return redirect("/login");
   }
 };
 const checkAlreadyLogin = async () => {
   const userName = await JSON.parse(sessionStorage.getItem("user"));
   const saveToken = sessionStorage.getItem("token");
-  if (userName?.id === "eb87aaa2-bf85-48d5-56a4-08d906dd12b1" && saveToken?.startsWith("Bearer")) {
+  if (
+    userName?.id === "eb87aaa2-bf85-48d5-56a4-08d906dd12b1" &&
+    saveToken?.startsWith("Bearer")
+  ) {
     return redirect("/admin");
   } else {
     return null;
   }
-}
+};
 
 const router = createBrowserRouter([
   {
@@ -50,6 +55,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <MainPage />,
+      },
+      {
+        path: "registration",
+        element: <RegistrationPage />,
       },
       {
         path: "login",
@@ -104,13 +113,14 @@ const router = createBrowserRouter([
             ],
           },
 
-          { path: "new-order", 
-            
+          {
+            path: "new-order",
+
             element: <NewOrderPage />,
           },
           {
             path: "order",
-            element: <OrderListPage /> 
+            element: <OrderListPage />,
           },
         ],
       },

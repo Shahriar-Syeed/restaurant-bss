@@ -126,7 +126,7 @@ export default function TableAddPage() {
           {errorMessage ? <p>{errorMessage}</p> : <p>Submit fail!</p>}
           <div className="modal-action p-2">
             <Button
-              className="float-end button-primary px-4 py-2 rounded-lg"
+              className="float-end button-primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg border-solid border-2 border-primary"
               onClick={closeModal}
               type="button"
             >
@@ -141,7 +141,7 @@ export default function TableAddPage() {
           <p>Please fill up table number and number of seats.</p>
           <div className=" p-2">
             <Button
-              className="float-end button-primary px-4 py-2 rounded-lg"
+              className="float-end button-primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
               onClick={closeModal}
               type="button"
             >

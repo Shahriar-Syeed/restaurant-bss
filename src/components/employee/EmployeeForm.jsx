@@ -39,12 +39,12 @@ export default function EmployeeForm() {
       designation: "",
       dob: "",
       joinDate: "",
-      nid: 0,
+      nid: "",
     },
     validateEmployeeEntry,
     ["phoneNumber", "nid"]
   );
-  const forwardRef = useRef();
+  const formRef = useRef();
 
   const imageCaptureRef = useRef();
 
@@ -102,7 +102,7 @@ export default function EmployeeForm() {
   async function handleSubmit(event) {
     event?.preventDefault();
 
-    const fetchData = new FormData(forwardRef.current);
+    const fetchData = new FormData(formRef.current);
     const data = Object.fromEntries(fetchData.entries());
     console.log(data);
     let updatedData = { ...data };
@@ -150,7 +150,7 @@ export default function EmployeeForm() {
 
   return (
     <>
-      <form ref={forwardRef}>
+      <form ref={formRef}>
         {modalId === "employee-create-confirmation" && (
           <Modal open={isOpen} onClose={closeModal}>
             <h3 className="md:text-xl mb-3">
@@ -159,14 +159,14 @@ export default function EmployeeForm() {
 
             <div className="modal-action p-2 flex justify-end gap-2 flex-wrap">
               <Button
-                className="button__outline--primary px-4 py-2 rounded-lg"
+                className="button__outline--primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
                 onClick={closeModal}
                 type="button"
               >
                 Cancel
               </Button>
               <Button
-                className="button-primary px-4 py-2 rounded-lg"
+                className="button-primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg border-solid border-2 border-primary"
                 type="button"
                 onClick={handleSubmit}
               >
@@ -201,7 +201,7 @@ export default function EmployeeForm() {
           </div>
           <div className="lg:col-start-1 lg:col-end-9 lg:row-start-1 relative">
             <InputFloating
-              name="firstName"
+              id="firstName"
               onChange={handleChange}
               onBlur={handleBlur}
             >
@@ -215,7 +215,7 @@ export default function EmployeeForm() {
           </div>
           <div className="lg:col-start-1 lg:col-end-9 lg:row-start-2 relative">
             <InputFloating
-              name="middleName"
+              id="middleName"
               onChange={handleChange}
               onBlur={handleBlur}
             >
@@ -229,7 +229,7 @@ export default function EmployeeForm() {
           </div>
           <div className="lg:col-start-1 lg:col-end-9 lg:row-start-3 relative">
             <InputFloating
-              name="lastName"
+              id="lastName"
               onChange={handleChange}
               onBlur={handleBlur}
             >
@@ -243,7 +243,7 @@ export default function EmployeeForm() {
           </div>
           <div className="lg:col-span-4 relative">
             <InputFloating
-              name="fatherName"
+              id="fatherName"
               onChange={handleChange}
               onBlur={handleBlur}
             >
@@ -257,7 +257,7 @@ export default function EmployeeForm() {
           </div>
           <div className="lg:col-span-4">
             <InputFloating
-              name="motherName"
+              id="motherName"
               onChange={handleChange}
               onBlur={handleBlur}
             >
@@ -271,7 +271,7 @@ export default function EmployeeForm() {
           </div>
           <div className="lg:col-span-4 relative">
             <InputFloating
-              name="spouseName"
+              id="spouseName"
               onChange={handleChange}
               onBlur={handleBlur}
             >
@@ -285,7 +285,7 @@ export default function EmployeeForm() {
           </div>
           <div className="lg:col-span-4 relative">
             <InputFloating
-              name="designation"
+              id="designation"
               onChange={handleChange}
               onBlur={handleBlur}
             >
@@ -299,7 +299,7 @@ export default function EmployeeForm() {
           </div>
           <div className="lg:col-span-4 relative">
             <InputFloating
-              name="email"
+              id="email"
               onChange={handleChange}
               onBlur={handleBlur}
             >
@@ -313,7 +313,7 @@ export default function EmployeeForm() {
           </div>
           <div className="lg:col-span-4 relative">
             <InputFloating
-              name="phoneNumber"
+              id="phoneNumber"
               onChange={handleChange}
               onBlur={handleBlur}
               value={formData.phoneNumber}
@@ -328,7 +328,7 @@ export default function EmployeeForm() {
           </div>
           <div className="lg:col-span-3 relative">
             <CustomSelect
-              name="genderId"
+              id="genderId"
               label="Gender"
               options={genderOptions}
               maximumHeight="60"
@@ -344,7 +344,7 @@ export default function EmployeeForm() {
           <div className="lg:col-span-3 relative">
             <InputFloating
               type="date"
-              name="dob"
+              id="dob"
               onChange={handleChange}
               onBlur={handleBlur}
             >
@@ -359,7 +359,7 @@ export default function EmployeeForm() {
           <div className="lg:col-span-3 relative">
             <InputFloating
               type="date"
-              name="joinDate"
+              id="joinDate"
               onChange={handleChange}
               onBlur={handleBlur}
             >
@@ -374,7 +374,7 @@ export default function EmployeeForm() {
           <div className="lg:col-span-3 relative">
             <InputFloating
               type="number"
-              name="nid"
+              id="nid"
               onChange={handleChange}
               onBlur={handleBlur}
             >

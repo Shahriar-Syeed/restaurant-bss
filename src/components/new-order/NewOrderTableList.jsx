@@ -1,18 +1,18 @@
+import { forwardRef } from "react";
 import defaultImage from "../../assets/default-image-preview.png";
+import apiUrl from "../../apiUrl/ApiUrl";
 
-export default function NewOrderTableList({
-  table,
-  handleSelection,
-  isSelected,
-  ...props
-}) {
+const NewOrderTableList = forwardRef(function NewOrderTableList(
+  { table, ...props },
+  tableRef
+) {
   return (
-    <div {...props}>
+    <div {...props} ref={tableRef}>
       <img
         src={
           table.image === ""
             ? defaultImage
-            : `https://restaurantapi.bssoln.com/images/table/${table.image}`
+            : `${apiUrl.getTableImage}${table.image}`
         }
         alt="table"
         className="w-24 max-h-16 rounded-lg object-cover"
@@ -22,4 +22,6 @@ export default function NewOrderTableList({
       </span>
     </div>
   );
-}
+});
+
+export default NewOrderTableList;

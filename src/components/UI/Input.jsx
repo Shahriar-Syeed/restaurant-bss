@@ -6,6 +6,7 @@ import Button from "./Button";
 export default function Input({
   children,
   id,
+  name,
   error,
   eyeButton,
   labelClass,
@@ -48,8 +49,8 @@ export default function Input({
           <div className="flex p-3.5 rounded border border-slate-250 items-center">
             <input
               type={toggle ? "text" : "password"}
-              id={id}
-              name={id}
+              id={id ?? name}
+              name={name ?? id}
               className="h-6 block"
               {...props}
               style={{ width: "90%" }}
@@ -77,7 +78,7 @@ export default function Input({
             >
               {children}
             </label>
-            <input {...props} id={id ?? name} name={id ?? name} />
+            <input {...props} id={id ?? name} name={ name ?? id} />
           </div>
           <div className={errorClass && errorClass}>{error && <p>{error}</p>}</div>
         </>
@@ -89,6 +90,7 @@ export default function Input({
 Input.propTypes = {
   children: PropTypes.node.isRequired,
   id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   error: PropTypes.string,
   labelClass: PropTypes.string,
   eyeButton: PropTypes.bool,

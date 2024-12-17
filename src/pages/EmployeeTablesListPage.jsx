@@ -10,10 +10,6 @@ import {
   getEmployeeTables,
 } from "../store/employee-tables-actions";
 import Loading from "../components/loader/Loading";
-import Modal from "../components/UI/Modal";
-import { modalActions } from "../store/modal-slice";
-import { employeeTablesActions } from "../store/employee-tables-slice";
-import Button from "../components/UI/Button";
 
 const HEADING = [
   { id: "tableNumber", label: "Table Number" },
@@ -33,18 +29,8 @@ export default function EmployeeTablesListPage() {
     (state) => state.employeeTables.employeeTablesDataTable
   );
 
-
-  const errorMessage = useSelector((state) => state.employeeTables.error);
-  const isOpen = useSelector((state) => state.modal.open);
-
-  function closeModal() {
-    dispatch(modalActions.close());
-    dispatch(employeeTablesActions.setErrorMessage(undefined));
-  }
-
   useEffect(() => {
     dispatch(getEmployeeTables(pageNumber, itemsPerPage));
-    // dispatch(getAssignEmployeeAndTableDetails());
   }, [pageNumber, itemsPerPage, dispatch]);
   function handleDelete(id) {
     dispatch(deleteEmployeeTable(id));
@@ -52,31 +38,14 @@ export default function EmployeeTablesListPage() {
 
   return (
     <>
-      {errorMessage && (
-        <Modal open={isOpen}>
-          <h1>Failed!</h1>
-          {errorMessage ? <p>{errorMessage}</p> : <p>Something went wrong</p>}
-          <div className="modal-action p-2">
-            <Button
-              className="float-end button-primary px-4 py-2 rounded-lg"
-              type="button"
-              onClick={closeModal}
-            >
-              Close
-            </Button>
-          </div>
-        </Modal>
-      )}
       {isLoading && <Loading fullHeightWidth />}
       <PageHeader
         title="All Table List"
         buttonLabel="ADD TABLE"
-        buttonOnClick={() =>
-          navigate("add-table")
-        }
+        buttonOnClick={() => navigate("add-table")}
       />
       <div className="shadow-md sm:rounded-t-lg">
-        <table className="w-full text-left rtl:text-right text-gray-900 text-xs sm:text-sm ">
+        <table className="w-full text-left rtl:text-right text-gray-900 text-xs sm:text-sm lg:text-base">
           <thead className="text-xs text-primary uppercase bg-gray-50 hidden sm:table-header-group">
             <tr>
               {HEADING?.map((heading) => (

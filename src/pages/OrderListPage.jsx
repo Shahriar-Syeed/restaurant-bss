@@ -16,6 +16,7 @@ import CustomSelect from "../components/UI/CustomSelect.jsx";
 import OrderCard from "../components/order/OrderCard.jsx";
 import usePageItems from "../customHooks/usePagesItems.js";
 import PageHeader from "../components/PageHeader.jsx";
+import ErrorModal from "../components/UI/ErrorModal.jsx";
 
 export default function OrderListPage() {
   const dispatch = useDispatch();
@@ -26,8 +27,12 @@ export default function OrderListPage() {
   const status = useSelector((state) => state.order.status);
   const errorMessage = useSelector((state) => state.order.error);
 
-  const { itemsPerPage, lastElementRef} = usePageItems(2,1, orderInfo, orderLoading );
-
+  const { itemsPerPage, lastElementRef } = usePageItems(
+    3,
+    3,
+    orderInfo,
+    orderLoading
+  );
 
   const statusOption = [
     { value: 0, label: "Pending", sendingValue: 0 },
@@ -41,8 +46,7 @@ export default function OrderListPage() {
 
   const isOpen = useSelector((state) => state.modal.open);
   const orderListId = useSelector((state) => state.modal.id);
-  const closeModal=()=> dispatch(modalActions.close());
-  
+  const closeModal = () => dispatch(modalActions.close());
 
   useEffect(() => {
     dispatch(getOrder(itemsPerPage));
@@ -56,7 +60,6 @@ export default function OrderListPage() {
   function editStatus(id, orderNum) {
     console.log(id);
     dispatch(openEditModal(id, orderNum));
-
   }
 
   function handelChange(e) {
@@ -68,17 +71,16 @@ export default function OrderListPage() {
     console.log("confirmStatus", id, changedStatus);
   }
 
-  
   return (
     <>
       {orderLoading && <Loading fullHeightWidth />}
-      {errorMessage && orderListId === "orderList" && (
+      {/* {errorMessage && orderListId === "orderList" && (
         <Modal open={isOpen} onClose={closeModal}>
           <h1>Failed fetching data, on {orderListId}!</h1>
           {errorMessage ? <p>{errorMessage}</p> : <p>Something went wrong!</p>}
           <div className="modal-action p-2">
             <Button
-              className="float-end button-primary px-4 py-2 rounded-lg"
+              className="float-end button-primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
               type="button"
               onClick={closeModal}
             >
@@ -86,7 +88,8 @@ export default function OrderListPage() {
             </Button>
           </div>
         </Modal>
-      )}
+      )} */}
+      {/* <ErrorModal/> */}
       {orderListId?.id === orderId && (
         <Modal open={isOpen} onClose={closeModal} className="overflow-visible">
           <h1 className="text-center text-xl mb-2">Change The Order Status</h1>
@@ -103,14 +106,14 @@ export default function OrderListPage() {
           />
           <div className="pt-3 flex flex-wrap justify-end gap-3">
             <Button
-              className=" button__outline--primary px-4 py-2 rounded-lg"
+              className=" button__outline--primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
               onClick={closeModal}
               type="button"
             >
               CANCEL
             </Button>
             <Button
-              className=" button-primary px-4 py-2 rounded-lg"
+              className=" button-primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
               onClick={() => confirmStatus(orderListId, status)}
               type="button"
             >
@@ -119,15 +122,32 @@ export default function OrderListPage() {
           </div>
         </Modal>
       )}
-      <PageHeader title='All Orders'/>
+      <PageHeader title="All Orders" />
       <div className="grid sm:justify-between justify-center auto-cols-auto 2xl:grid-cols-3 lg:grid-cols-3 sm:grid-cols-2 lg:gap-5 md:gap-3.5 sm:gap-3 gap-2">
-        {orderInfo?.data?.length !== 0 ? orderInfo?.data?.map((eachOrderItem, eachOrderItemIndex) =>
-          orderInfo.data.length !== eachOrderItemIndex + 1 ? (
-            <OrderCard eachOrderItem={eachOrderItem} key={eachOrderItem.id} deleteOrder={deleteOrder} editStatus={editStatus} />
-          ) : (
-            <OrderCard eachOrderItem={eachOrderItem} key={eachOrderItem.id} deleteOrder={deleteOrder} editStatus={editStatus} ref={lastElementRef}/>
+        {orderInfo?.data?.length !== 0 ? (
+          orderInfo?.data?.map((eachOrderItem, eachOrderItemIndex) =>
+            orderInfo.data.length !== eachOrderItemIndex + 1 ? (
+              <OrderCard
+                eachOrderItem={eachOrderItem}
+                key={eachOrderItem.id}
+                deleteOrder={deleteOrder}
+                editStatus={editStatus}
+              />
+            ) : (
+              <OrderCard
+                eachOrderItem={eachOrderItem}
+                key={eachOrderItem.id}
+                deleteOrder={deleteOrder}
+                editStatus={editStatus}
+                orderRef={lastElementRef}
+              />
+            )
           )
-        ) : <h1 className="text-center text-lg font-bold p-5 bg-white rounded-lg shadow-md col-start-1 -col-end-1">No Order has been created!</h1>}
+        ) : (
+          <h1 className="text-center text-lg font-bold p-5 bg-white rounded-lg shadow-md col-start-1 -col-end-1">
+            No Order has been created!
+          </h1>
+        )}
       </div>
     </>
   );

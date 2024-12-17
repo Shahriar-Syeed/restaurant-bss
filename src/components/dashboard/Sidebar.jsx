@@ -42,6 +42,7 @@ export default function Sidebar() {
   function goToLoginPage() {
     sessionStorage.removeItem("user");
     sessionStorage.removeItem("token");
+    sessionStorage.removeItem("refreshToken");
     navigate("/login");
   }
 
@@ -65,18 +66,17 @@ export default function Sidebar() {
         </svg>
       </Button>
       <Link
-                to="/admin"
-                className="sm:hidden flex items-center p-2 text-primary rounded-lg text-primary"
-              >
-                <div className="h-6 w-6 rounded-lg overflow-hidden">
-                  <img
-                    src={adminImage}
-                    alt="User Image"
-                    className="w-full object-cover"
-                  />
-                </div>
-    
-              </Link>
+        to="/admin"
+        className="sm:hidden flex items-center p-2 text-primary rounded-lg text-primary"
+      >
+        <div className="h-6 w-6 rounded-lg overflow-hidden">
+          <img
+            src={adminImage}
+            alt="User Image"
+            className="w-full object-cover"
+          />
+        </div>
+      </Link>
       <Button
         onClick={goToLoginPage}
         className="flex sm:hidden items-center p-1 text-sm text-primary rounded-lg xl:hidden hover:bg-red-800 focus:outline-none outline-none "
@@ -167,7 +167,7 @@ export default function Sidebar() {
                 onClick={sidebarToggle}
               >
                 <FoodIcon className="es:flex-shrink-0 es:w-5 w-4 es:h-5 h-4 text-primary transition duration-75" />
-              
+
                 <span className="hidden es:inline-block flex-1 sm:ms-3 whitespace-nowrap text-xs sm:text-base md:text-md md:font-bold">
                   Foods
                 </span>
@@ -184,7 +184,7 @@ export default function Sidebar() {
                 onClick={sidebarToggle}
               >
                 <NewOrderIcon className="es:flex-shrink-0 es:w-5 w-4 es:h-5 h-4 text-primary  transition duration-75" />
-                
+
                 <span className="hidden es:inline-block flex-1 sm:ms-3 whitespace-nowrap text-xs sm:text-base md:text-md md:font-bold">
                   New Order
                 </span>
@@ -201,7 +201,7 @@ export default function Sidebar() {
                 onClick={sidebarToggle}
               >
                 <OrderIcon className="es:flex-shrink-0 es:w-5 w-4 es:h-5 h-4 text-primary transition duration-75" />
-               
+
                 <span className="hidden es:inline-block flex-1 sm:ms-3 whitespace-nowrap text-xs sm:text-base md:text-md md:font-bold">
                   Orders
                 </span>
@@ -212,7 +212,7 @@ export default function Sidebar() {
             <li>
               <Button
                 onClick={goToLoginPage}
-                className="w-full button__outline--primary rounded-lg"
+                className="w-full button__outline--primary rounded-lg py-2 "
                 type="button"
               >
                 <LogoutIcon className="w-5 h-5 fill-inherit" />

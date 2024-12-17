@@ -1,35 +1,26 @@
 import Button from "../UI/Button.jsx";
-// import CustomSelect from "../UI/CustomSelect.jsx";
 import EmployeeSelect from "../UI/EmployeeSelect.jsx";
 import Modal from "../UI/Modal.jsx";
 import defaultImage from "../../assets/default-image-preview.png";
 import { useDispatch, useSelector } from "react-redux";
 import { postAssignEmployeesTable } from "../../store/employee-tables-actions";
-
-// import { customSelectActions } from "../../store/custom-select-slice";
 import { employeeSelectActions } from "../../store/employee-select-slice.js";
+import apiUrl from "../../apiUrl/ApiUrl.jsx";
 
 export default function AssignEmployeeModal({
-  // open,
   closeModal,
   tableInfoData,
 }) {
   const dispatch = useDispatch();
-  const loading = useSelector((state) => state.employeeTables.loading);
   const selectedEmployees = useSelector(
     (state) => state.employeeSelect.selectedOption
   );
-  // const assignEmployeeAndTableDetails = useSelector(state=>state.employeeTables.assignEmployeeAndTableDetails)
   const isOpen = useSelector((state) => state.modal.open);
   const employeesList = useSelector(
     (state) => state.employeeTables.nonAssignedEmployee
   );
 
-  const error = useSelector((state) => state.employeeTables.error);
-
-  // console.log(tableInfoData);
   const info = { ...tableInfoData };
-  // console.log("info", info);
 
   const employeesToAssign = employeesList?.map(
     (employee) =>
@@ -41,12 +32,10 @@ export default function AssignEmployeeModal({
   );
 
   function handleAssignEmployee(info) {
-    console.log("selectedEmployees", selectedEmployees);
     const updatedSelected = selectedEmployees?.map(
       (employee) =>
         (employee = { employeeId: employee.employeeId, tableId: info.id })
     );
-    console.log("info", info);
     dispatch(postAssignEmployeesTable(updatedSelected, info.id));
     dispatch(employeeSelectActions.setSelectedOption([]));
     closeModal();
@@ -54,10 +43,9 @@ export default function AssignEmployeeModal({
 
   return (
     <>
-      {error && <p>{error.message}</p>}
       <Modal open={isOpen} onClose={closeModal} className=" overflow-unset">
         <Button
-          className="button-primary sm:px-3 sm:py-1.5 px-2 py-1 rounded-lg absolute right-3 top-3 font-extrabold"
+          className="button-primary sm:px-3 sm:py-1.5 px-2 py-1 rounded-lg absolute right-3 top-3 font-extrabold border-solid border-2 border-primary"
           onClick={closeModal}
           type="button"
         >
@@ -69,12 +57,16 @@ export default function AssignEmployeeModal({
         </h1>
 
         <div className="grid grid-col-6 lg:gap-4 md:gap-3.5 sm:gap-3 gap-2.5">
-          <div className="flex items-center justify-center sm:col-end-3 col-start-1 col-end-7">
-            <div className=" sm:h-36 h-16 rounded-lg">
+          <div className="place-self-center sm:col-end-3 col-start-1 col-end-7">
+            <div className="sm:min-h-32 min-h-10 max-h-11 sm:max-w-40 max-w-14 rounded-lg overflow-hidden">
               <img
-                src={defaultImage}
+                src={
+                  info.image !== ""
+                    ? `${apiUrl.getTableImage}${info.image}`
+                    : defaultImage
+                }
                 alt=""
-                className=" h-full sm:max-w-full object-cover rounded-lg"
+                className="h-full rounded-lg "
               />
             </div>
           </div>

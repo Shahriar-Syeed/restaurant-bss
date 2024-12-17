@@ -1,17 +1,15 @@
-import axios from "axios";
 import { cartActions } from "./cart-slice.js";
 import { modalActions } from "./modal-slice.js";
+import { api } from "./axiosInstance.js";
 
 export const setTableIdInCart = (tableId, tableNumber) => {
   return async (dispatch) => {
-    try{
-
+    try {
       const res = await dispatch(cartActions.setSelectedTableId(tableId));
-       dispatch(cartActions.setSelectedTableNumber(tableNumber));
-    }catch(error){
+      dispatch(cartActions.setSelectedTableNumber(tableNumber));
+    } catch (error) {
       console.log(error);
     }
-
   };
 };
 export const addFood = (foodId, unitPrice, foodName, foodImage) => {
@@ -23,23 +21,17 @@ export const addFood = (foodId, unitPrice, foodName, foodImage) => {
 };
 export const addFoodQuantity = (foodId) => {
   return async (dispatch) => {
-    const res = await dispatch(
-      cartActions.increaseFoodQuantityInCart(foodId)
-    );
+    const res = await dispatch(cartActions.increaseFoodQuantityInCart(foodId));
   };
 };
 export const subtractFoodQuantity = (foodId) => {
   return async (dispatch) => {
-    const res = await dispatch(
-      cartActions.decreaseFoodQuantityInCart(foodId)
-    );
+    const res = await dispatch(cartActions.decreaseFoodQuantityInCart(foodId));
   };
 };
 export const removeFoodItem = (foodId) => {
   return async (dispatch) => {
-    const res = await dispatch(
-      cartActions.removeFoodInCart(foodId)
-    );
+    const res = await dispatch(cartActions.removeFoodInCart(foodId));
   };
 };
 
@@ -62,14 +54,12 @@ export const openCartDrawer = () => {
 export const createOrder = (data) => {
   return async (dispatch) => {
     dispatch(cartActions.loading(true));
-    console.log(data)
+    console.log(data);
     try {
-      const res = await axios.post(
-        `https://restaurantapi.bssoln.com/api/Order/create`,data
-      );
+      const res = await api.post(`Order/create`, data);
       console.log(res);
       if (res.status === 204 || res.status === 200) {
-        dispatch(cartActions.setCartItem({items:[]}));
+        dispatch(cartActions.setCartItem({ items: [] }));
         dispatch(cartActions.setSelectedTableId(null));
         dispatch(cartActions.setSelectedTableNumber(null));
         dispatch(cartActions.setSuccess(true));
@@ -79,14 +69,13 @@ export const createOrder = (data) => {
           dispatch(modalActions.close());
           dispatch(modalActions.id(null));
           dispatch(cartActions.setSuccess(false));
-
         }, 3000);
       }
       dispatch(cartActions.loading(false));
     } catch (error) {
       dispatch(cartActions.loading(false));
       dispatch(cartActions.errorMessage(error.message));
-      dispatch(modalActions.id('cart-error'));
+      dispatch(modalActions.id("Order Create Failed"));
       dispatch(modalActions.open());
       setTimeout(() => {
         dispatch(modalActions.close());
@@ -95,5 +84,3 @@ export const createOrder = (data) => {
     }
   };
 };
-
-

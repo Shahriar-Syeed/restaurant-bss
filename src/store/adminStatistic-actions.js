@@ -1,38 +1,37 @@
-import axios from "axios";
 import { modalActions } from "./modal-slice.js";
 import { adminStatisticsActions } from "./adminStatistics-slice.js";
+import { api } from "./axiosInstance.js";
+
 export const getAdminStatistics = () => {
   return async (dispatch) => {
     dispatch(adminStatisticsActions.loading(true));
     try {
-      const employeeResponse = await axios.get(
-        `https://restaurantapi.bssoln.com/api/Employee/get`
-      );
-      const tableResponse = await axios.get(
-        `https://restaurantapi.bssoln.com/api/Table/get`
-      );
-      const foodResponse = await axios.get(
-        `https://restaurantapi.bssoln.com/api/Food/get`
-      );
-      const orderResponse = await axios.get(
-        `https://restaurantapi.bssoln.com/api/Order/get`
-      );
-      if(employeeResponse.status === 200){
-        dispatch(adminStatisticsActions.getEmployeesStatistics(employeeResponse.data));
+      const employeeResponse = await api.get(`Employee/get`);
+      const tableResponse = await api.get(`Table/get`);
+      const foodResponse = await api.get(`Food/get`);
+      const orderResponse = await api.get(`Order/get`);
+      if (employeeResponse.status === 200) {
+        dispatch(
+          adminStatisticsActions.getEmployeesStatistics(employeeResponse.data)
+        );
       }
-      if(tableResponse.status === 200){
-        dispatch(adminStatisticsActions.getTablesStatistics(tableResponse.data));
+      if (tableResponse.status === 200) {
+        dispatch(
+          adminStatisticsActions.getTablesStatistics(tableResponse.data)
+        );
       }
-      if(foodResponse.status === 200){
+      if (foodResponse.status === 200) {
         dispatch(adminStatisticsActions.getFoodsStatistics(foodResponse.data));
       }
-      if(orderResponse.status === 200){
-        dispatch(adminStatisticsActions.getOrdersStatistics(orderResponse.data));
+      if (orderResponse.status === 200) {
+        dispatch(
+          adminStatisticsActions.getOrdersStatistics(orderResponse.data)
+        );
       }
-      
+
       dispatch(adminStatisticsActions.loading(false));
     } catch (error) {
-      dispatch(modalActions.id("statistic-fail"));
+      dispatch(modalActions.id("Statistic Getting fail"));
       dispatch(adminStatisticsActions.loading(false));
       dispatch(adminStatisticsActions.errorMessage(error.message));
       dispatch(modalActions.open());
@@ -154,6 +153,6 @@ export const getAdminStatistics = () => {
 //         dispatch(modalActions.close());
 //         dispatch(modalActions.id(null));
 //       }, 3000);
-//     }    
+//     }
 //   };
 // };

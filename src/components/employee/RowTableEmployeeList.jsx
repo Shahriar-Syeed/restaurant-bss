@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Modal from "../UI/Modal.jsx";
 import { modalActions } from "../../store/modal-slice.js";
 import defaultImage from "../../assets/default-image-preview.png";
+import apiUrl from "../../apiUrl/ApiUrl.jsx";
 
 export default function RowTableEmployeeList({ deleteEmployee }) {
   const dispatch = useDispatch();
@@ -12,8 +13,7 @@ export default function RowTableEmployeeList({ deleteEmployee }) {
   );
   const modalId = useSelector((state) => state.modal.id);
   const isOpen = useSelector((state) => state.modal.open);
-  function openModal(id, name) {
-    console.log(name);
+  function openModal(id) {
     dispatch(modalActions.id(id));
     dispatch(modalActions.open());
   }
@@ -37,14 +37,14 @@ export default function RowTableEmployeeList({ deleteEmployee }) {
 
               <div className="flex gap-2 flex-wrap justify-end p-2">
                 <Button
-                  className="float-end button__outline--primary px-4 py-2 rounded-lg"
+                  className="float-end button__outline--primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
                   onClick={closeModal}
                   type="button"
                 >
                   Cancel
                 </Button>
                 <Button
-                  className="float-end button-primary px-4 py-2 rounded-lg"
+                  className="float-end button-primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
                   onClick={() => deleteEmployee(employee.id)}
                   type="button"
                 >
@@ -58,11 +58,11 @@ export default function RowTableEmployeeList({ deleteEmployee }) {
             className="flex sm:table-cell justify-center md:px-2 xl:px-4 xl:py-3 lg:px-3 lg:py-2 p-1"
           >
             <img
-             src={
-              employee.user.image !== ''
-                ? `https://restaurantapi.bssoln.com/images/user/${employee.user.image}`
-                : defaultImage
-            }
+              src={
+                employee.user.image !== ""
+                  ? `${apiUrl.getImage}${employee.user.image}`
+                  : defaultImage
+              }
               alt="Admin image"
               className="sm:w-10 sm:h-10 w-16 h-16 rounded-lg object-cover"
             />

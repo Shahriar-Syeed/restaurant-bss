@@ -1,6 +1,7 @@
 export default function TextAreaFloating({
   children,
   id,
+  name,
   error,
   type,
   ...props
@@ -9,7 +10,8 @@ export default function TextAreaFloating({
     <div className="relative group">
       <textarea
         {...props}
-        id={id}
+        id={id ?? name}
+        name={name ?? id}
         className={`block p-3.5 w-full text-xsm sm:text-sm md:text-base lea text-gray-900 bg-transparent h-full max-h-44 ${
           type !== "date" && " z-10"
         } rounded border border-gray-200 placeholder-shown:border-gray-200 group-hover:border-gray-400 appearance-none focus:outline-none focus:ring-0 ${

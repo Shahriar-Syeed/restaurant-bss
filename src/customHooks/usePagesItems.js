@@ -7,7 +7,7 @@ export default function usePageItems(
   isLoading
 ) {
   const [itemsPerPage, setItemsPerPage] = useState(initialItemsPerPage);
-  const observeRef = useRef();
+  const observeRef = useRef(null);
   console.log(data.totalRecords)
   const hasMoreOrder = data.totalRecords - itemsPerPage;
   const lastElementRef = useCallback(
