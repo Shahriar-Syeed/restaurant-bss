@@ -62,20 +62,21 @@ export default function RowEmployeeTableList({
   return (
     <>
 
-      {modalTableId?.id === tableInfoData.id && (
+      {modalTableId?.id === tableInfoData.id &&
+        modalTableId?.employeeTableId !== "deleteWholeTable" && (
         <Modal open={isOpen}>
           <h1>Confirmation!</h1>
           <p>Are you sure you want to remove this employee from this table?</p>
           <div className="flex flex-wrap justify-end gap-1 p-2">
             <Button
-              className="button__outline--primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
+              className="button__outline--primary sm:py-2 sm:px-4 es:py-1.5 es:px-3 py-2 px-2 text-xs es:text-sm sm:text-base rounded-lg"
               onClick={closeNormalModal}
               type="button"
             >
               Close
             </Button>
             <Button
-              className="button-primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg border-solid border-2 border-primary"
+              className="button-primary sm:py-2 sm:px-4 es:py-1.5 es:px-3 py-2 px-2 text-xs es:text-sm sm:text-base rounded-lg border-solid border-2 border-primary"
               onClick={() => handleDeleteEmployeeFromTable()}
               type="button"
             >
@@ -91,14 +92,14 @@ export default function RowEmployeeTableList({
             <p>Are you sure you want to remove this table?</p>
             <div className="flex flex-wrap justify-end gap-1 p-2">
               <Button
-                className="button__outline--primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
+                className="button__outline--primary sm:py-2 sm:px-4 es:py-1.5 es:px-3 py-2 px-2 text-xs es:text-sm sm:text-base rounded-lg"
                 onClick={closeNormalModal}
                 type="button"
               >
                 Close
               </Button>
               <Button
-                className="button-primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
+                className="button-primary sm:py-2 sm:px-4 es:py-1.5 es:px-3 py-2 px-2 text-xs es:text-sm sm:text-base rounded-lg"
                 onClick={() => handleWholeTableDelete(modalTableId.id)}
                 type="button"
               >

@@ -88,7 +88,7 @@ export default function AssignEmployeeModal({
             />
           </div>
           <Button
-            className="button-primary lg:px-4 lg:py-2 px-3 py-1.5 rounded-lg lg:col-start-5 col-start-6 col-end-7 self-center sm:text-base text-xs"
+            className="button-primary sm:py-2 sm:px-4 es:py-1.5 es:px-3 py-2 px-2 text-xs es:text-sm sm:text-base rounded-lg lg:col-start-5 col-start-6 col-end-7 self-center"
             onClick={() => handleAssignEmployee(info)}
             type="button"
           >

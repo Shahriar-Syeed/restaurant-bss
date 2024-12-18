@@ -37,14 +37,14 @@ export default function RowTableEmployeeList({ deleteEmployee }) {
 
               <div className="flex gap-2 flex-wrap justify-end p-2">
                 <Button
-                  className="float-end button__outline--primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
+                  className="float-end button__outline--primary sm:py-2 sm:px-4 es:py-1.5 es:px-3 py-2 px-2 text-xs es:text-sm sm:text-base rounded-lg"
                   onClick={closeModal}
                   type="button"
                 >
                   Cancel
                 </Button>
                 <Button
-                  className="float-end button-primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
+                  className="float-end button-primary sm:py-2 sm:px-4 es:py-1.5 es:px-3 py-2 px-2 text-xs es:text-sm sm:text-base rounded-lg"
                   onClick={() => deleteEmployee(employee.id)}
                   type="button"
                 >

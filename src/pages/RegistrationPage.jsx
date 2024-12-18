@@ -18,6 +18,7 @@ import Modal from "../components/UI/Modal.jsx";
 import defaultImage from "../assets/default-image-preview.png";
 import Loading from "../components/loader/Loading.jsx";
 import validateEmployeeEntry from "../components/utility/employeeValidationUtility.js";
+import BackIcon from "../components/svg/BackIcon.jsx";
 
 export default function RegistrationPage() {
   const {
@@ -157,14 +158,14 @@ export default function RegistrationPage() {
 
           <div className="modal-action p-2 flex justify-end gap-2 flex-wrap">
             <Button
-              className="button__outline--primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
+              className="button__outline--primary sm:py-2 sm:px-4 es:py-1.5 es:px-3 py-2 px-2 text-xs es:text-sm sm:text-base rounded-lg"
               onClick={closeModal}
               type="button"
             >
               Cancel
             </Button>
             <Button
-              className="button-primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
+              className="button-primary sm:py-2 sm:px-4 es:py-1.5 es:px-3 py-2 px-2 text-xs es:text-sm sm:text-base rounded-lg"
               type="button"
               onClick={handleSubmit}
             >
@@ -180,13 +181,13 @@ export default function RegistrationPage() {
         >
           Login
         </NavLink>
-          <Button
-            className=" button__outline--primary sm:px-6 sm:py-3 es:px-3 es:py-1.5 px-2 py-1 rounded-md sm:text-lg es:text-base text-sm font-semibold hover:border-white"
-            onClick={() => navigate("../")}
-          >
-            {" "}
-            back
-          </Button>
+        <Button
+          className=" button__outline--primary sm:px-6 sm:py-3 es:px-3 es:py-1.5 px-2 py-1 rounded-md sm:text-lg es:text-base text-sm font-semibold hover:border-white"
+          onClick={() => navigate("../")}
+        >
+          <BackIcon className="w-3 md:w-3.5 lg:w-5" />
+          <span className="hidden es:inline">BACK</span>
+        </Button>
       </Navbar>
       <section className="min-h-lvh bg--page xl:p-20 lg:p-16 md:p-10">
         <div className="bg-white xl:p-10 lg:p-8 md:p-6 sm:p-4 p-3 rounded relative">

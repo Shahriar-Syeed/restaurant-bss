@@ -157,14 +157,14 @@ export default function FoodAddPage() {
 
             <div className="modal-action p-2 flex justify-end gap-2 flex-wrap">
               <Button
-                className="button__outline--primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
+                className="button__outline--primary sm:py-2 sm:px-4 es:py-1.5 es:px-3 py-2 px-2 text-xs es:text-sm sm:text-base rounded-lg"
                 onClick={closeModal}
                 type="button"
               >
                 Cancel
               </Button>
               <Button
-                className="button-primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
+                className="button-primary sm:py-2 sm:px-4 es:py-1.5 es:px-3 py-2 px-2 text-xs es:text-sm sm:text-base rounded-lg"
                 type="button"
                 onClick={handleSubmit}
               >

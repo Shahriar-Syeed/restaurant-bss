@@ -50,7 +50,7 @@ const NewOrderMenuList = forwardRef(function NewOrderMenuList(
         <div className="flex gap-1 flex-wrap items-center justify-center sm:items-start sm:justify-start">
           {cartItems.items.some((item) => item.foodId === menuItem.id) && (
             <Button
-              className="button button__outline--primary sm:py-2 sm:px-4 py-1.5 px-3 text-white rounded-md order-2"
+              className="button button__outline--primary sm:py-2 sm:px-4 es:py-1.5 es:px-3 py-2 px-2 text-xs es:text-sm sm:text-base text-white rounded-md order-2"
               type="button"
               onClick={toggleCart}
             >
@@ -58,7 +58,7 @@ const NewOrderMenuList = forwardRef(function NewOrderMenuList(
             </Button>
           )}
           <Button
-            className="button button-primary sm:py-2 sm:px-4 py-1.5 px-3 text-white rounded-md sm:order-3"
+            className="button button-primary sm:py-2 sm:px-4 es:py-1.5 es:px-3 py-2 px-2 text-xs es:text-sm sm:text-base text-white rounded-md sm:order-3"
             type="button"
             onClick={() => addFoodItemInCart(menuItem)}
           >

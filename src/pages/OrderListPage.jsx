@@ -80,7 +80,7 @@ export default function OrderListPage() {
           {errorMessage ? <p>{errorMessage}</p> : <p>Something went wrong!</p>}
           <div className="modal-action p-2">
             <Button
-              className="float-end button-primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
+              className="float-end button-primary sm:py-2 sm:px-4 es:py-1.5 es:px-3 py-2 px-2 text-xs es:text-sm sm:text-base rounded-lg"
               type="button"
               onClick={closeModal}
             >
@@ -106,14 +106,14 @@ export default function OrderListPage() {
           />
           <div className="pt-3 flex flex-wrap justify-end gap-3">
             <Button
-              className=" button__outline--primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
+              className=" button__outline--primary sm:py-2 sm:px-4 es:py-1.5 es:px-3 py-2 px-2 text-xs es:text-sm sm:text-base rounded-lg"
               onClick={closeModal}
               type="button"
             >
               CANCEL
             </Button>
             <Button
-              className=" button-primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg"
+              className=" button-primary sm:py-2 sm:px-4 es:py-1.5 es:px-3 py-2 px-2 text-xs es:text-sm sm:text-base rounded-lg"
               onClick={() => confirmStatus(orderListId, status)}
               type="button"
             >

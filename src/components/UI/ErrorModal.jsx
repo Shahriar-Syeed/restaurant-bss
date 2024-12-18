@@ -82,7 +82,7 @@ const ErrorModal = () => {
 
         <div className="">
           <Button
-            className="button-primary sm:py-2 sm:px-4 py-1.5 px-3 rounded-lg float-end"
+            className="button-primary sm:py-2 sm:px-4 es:py-1.5 es:px-3 py-2 px-2 text-xs es:text-sm sm:text-base rounded-lg float-end"
             type="button"
             onClick={closeModal}
           >
