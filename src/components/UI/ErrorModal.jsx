@@ -8,6 +8,7 @@ const ErrorModal = () => {
 
   const isOpen = useSelector((state) => state.modal.open);
   const errorModalId = useSelector((state) => state.modal.id);
+  const registerErrorMessage = useSelector((state) => state.register.error);
   const loginErrorMessage = useSelector((state) => state.login.error);
   const employeeErrorMessage = useSelector((state) => state.employees.error);
   const foodErrorMessage = useSelector((state) => state.foods.error);
@@ -28,6 +29,8 @@ const ErrorModal = () => {
     ? "Food Error!"
     : loginErrorMessage
     ? "Failed To Login!"
+    : registerErrorMessage
+    ? "Failed To Register!"
     : tableErrorMessage
     ? "Table Error!"
     : cartErrorMessage
@@ -49,6 +52,7 @@ const ErrorModal = () => {
     cartErrorMessage ??
     statisticsErrorMessage ??
     loginErrorMessage ??
+    registerErrorMessage ??
     cartSuccess ??
     null;
   console.log(errorModalId);
@@ -88,7 +92,6 @@ const ErrorModal = () => {
       </div>
     </Modal>
   ) : null;
-  console.log(returnModal);
 
   return returnModal;
 };

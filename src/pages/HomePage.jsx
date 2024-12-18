@@ -80,7 +80,7 @@ export default function HomePage() {
         </div>
         <div className="bg-white rounded-lg p-4 sm:p-6 lg:p-7 xl:p-8 2xl:p-9 shadow-xl  max-w-full max-h-96">
           <h2 className="text-primary font-bold text-lg text-center">
-            Weekly Profit Figure
+            Monthly Profit Figure
           </h2>
           <BarGraph graphClassName="max-w-full max-h-40"/>
         </div>
