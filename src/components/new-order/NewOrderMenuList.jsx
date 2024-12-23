@@ -11,7 +11,8 @@ const NewOrderMenuList = forwardRef(function NewOrderMenuList(
   const cartItems = useSelector((state) => state.cart.cartItem);
   return (
     <div {...props} ref={tableRef}>
-      <div className="lg:row-span-4 place-self-center max-w-52">
+      <div className="lg:row-span-4 place-self-center">
+        <div className="w-full h-32 rounded-lg overflow-clip"></div>
         <img
           src={
             menuItem.image
@@ -19,7 +20,7 @@ const NewOrderMenuList = forwardRef(function NewOrderMenuList(
               : defaultImage
           }
           alt={menuItem.name}
-          className="w-full object-cover rounded-lg"
+          className="w-full h-full object-cover rounded-lg"
         />
       </div>
       <h2 className="lg:text-2xl md:text-xl sm:text-lg text-md lg:col-start-2 lg:col-end-5 font-bold capitalize">
