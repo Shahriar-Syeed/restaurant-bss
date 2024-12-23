@@ -40,18 +40,17 @@ export default function Input({
             className={
               labelClass
                 ? labelClass
-                : "block text-lg text-zinc-350 mb-2 capitalize"
+                : "block text-lg text-zinc-500 mb-2 capitalize"
             }
           >
             {children}
           </label>
 
-          <div className="flex p-3.5 rounded border border-slate-250 items-center">
+          <div className="flex p-3 rounded border border-slate-250 items-center">
             <input
               type={toggle ? "text" : "password"}
               id={id ?? name}
               name={name ?? id}
-              className="h-6 block"
               {...props}
               style={{ width: "90%" }}
             />
@@ -73,7 +72,7 @@ export default function Input({
               className={
                 labelClass
                   ? labelClass
-                  : "block text-lg text-zinc-350 mb-2 capitalize"
+                  : "block text-lg text-zinc-500 mb-2 capitalize"
               }
             >
               {children}

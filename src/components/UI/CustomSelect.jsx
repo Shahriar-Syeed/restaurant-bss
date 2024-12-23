@@ -10,6 +10,7 @@ const CustomSelect = ({
   name,
   maximumHeight,
   onChanged,
+  optionSelected,
   ...props
 }) => {
   const isOpen = useSelector((state) => state.customSelect.isOpen);
@@ -21,6 +22,17 @@ const CustomSelect = ({
   const showOption = useRef();
 
   useEffect(() => {
+    if (optionSelected) {
+      const selectedValue = options.find(
+        (value) => value.label === optionSelected
+      );
+      console.log(selectedValue, "khhhhr", optionSelected);
+      dispatch(customSelectActions.setIsOpen(false));
+      dispatch(customSelectActions.setIsFocused(true));
+      onChanged(optionSelected);
+      dispatch(customSelectActions.setSelectedOption(selectedValue));
+      console.log(selectedOption, "111111111111111111111111111");
+    }
     const handler = (e) => {
       if (!showOption.current.contains(e.target)) {
         dispatch(customSelectActions.setIsOpen(false));
@@ -30,6 +42,7 @@ const CustomSelect = ({
       }
     };
     document.addEventListener("mousedown", handler);
+    !optionSelected &&
     dispatch(customSelectActions.setSelectedOption(null));
 
     return () => {
@@ -39,16 +52,22 @@ const CustomSelect = ({
 
   const handleToggle = () => {
     dispatch(customSelectActions.setIsOpen(!isOpen));
+    console.log(optionSelected, !optionSelected);
 
+    if (optionSelected) {
+      dispatch(customSelectActions.setIsFocused(true));
+      return;
+    }
     if (!selectedOption || (selectedOption && selectedOption.length === 0)) {
       dispatch(customSelectActions.setIsFocused(!isFocused));
     }
   };
 
   const handleSelect = (option) => {
+    console.log(option);
     dispatch(customSelectActions.setSelectedOption(option));
 
-    dispatch(customSelectActions.setIsOpen(false));    
+    dispatch(customSelectActions.setIsOpen(false));
 
     if (!selectedOption) {
       dispatch(customSelectActions.setIsFocused(true));
@@ -67,7 +86,7 @@ const CustomSelect = ({
   };
 
   return (
-    <div className={`${className ?? ''} relative`} ref={showOption}>
+    <div className={`${className ?? ""} relative`} ref={showOption}>
       <input
         type="hidden"
         value={selectedOption ? selectedOption.sendingValue : 0}
@@ -100,9 +119,10 @@ const CustomSelect = ({
         <span
           className={`flex-1 max-h-16 overflow-y-auto [&::-webkit-scrollbar]:w-2
           [&::-webkit-scrollbar-track]:bg-neutral-700
-          [&::-webkit-scrollbar-thumb]:bg-neutral-300 text-xs sm:text-sm md:text-base text-gray-600`}
+          [&::-webkit-scrollbar-thumb]:bg-neutral-300 text-xs sm:text-sm md:text-base text-gray-700`}
         >
           {selectedOption?.label}
+        
         </span>
         <svg
           className={`transform transition-transform ${
@@ -125,7 +145,7 @@ const CustomSelect = ({
           {options?.map((option) => (
             <li
               key={option.value}
-              className="p-2 hover:bg-gray-100 cursor-pointer text-xs sm:text-sm md:text-base"
+              className={`p-2 hover:bg-gray-100 cursor-pointer text-xs sm:text-sm md:text-base ${option.label === optionSelected && 'bg-gray-100'}`}
               onClick={() => handleSelect(option)}
             >
               {option.label}

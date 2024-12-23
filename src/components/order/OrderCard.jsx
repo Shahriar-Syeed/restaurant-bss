@@ -12,26 +12,32 @@ const OrderCard = forwardRef(function OrderCard(
     <div
       {...props}
       ref={orderRef}
-      className="rounded-lg border-2 mx-auto xl:p-10 lg:p-6 md:p-5 sm:p-4 p-3 shadow-lg bg-white sm:w-[min(100%,_25rem)] w-[min(90%,_25rem)]"
+      className="rounded-lg border-2 mx-auto xl:p-10 lg:p-6 md:p-5 sm:p-4 p-3 shadow-lg bg-white sm:w-[min(100%,_25rem)] w-[min(90%,_25rem)] overflow-x-clip relative group"
     >
       <div className="flex justify-between mb-3 gap-0.5">
         <div>
           <h3 className="text-md md:text-xl sm:text-lg font-bold text-stone-900/90">
             {eachOrderItem.orderNumber}
           </h3>
-          <p>{eachOrderItem.id}</p>
           <p className="font-bold text-stone-900/80">
-            {eachOrderItem.orderTime}
+            Date: {eachOrderItem.orderTime}
           </p>
         </div>
         <Button
           type="button"
           onClick={() => deleteOrder(eachOrderItem.id)}
-          className="self-start"
+          className=" self-start"
         >
-          <DeleteIcon className="sm:p-1.5 p-1 border border-red-700 hover:bg-red-700 fill-red-700 hover:fill-white rounded-lg sm:w-8 md:w-10 w-7" />
+          <DeleteIcon className="xl:hidden sm:p-1.5 p-1 border border-red-700 hover:bg-red-700 fill-red-700 hover:fill-white rounded-xl sm:w-8 md:w-10 w-7" />
         </Button>
       </div>
+      <Button
+        type="button"
+        onClick={() => deleteOrder(eachOrderItem.id)}
+        className="absolute hidden xl:top-0 xl:right-0 translate-x-full xl:group-hover:inline-block xl:group-hover:translate-x-0 xl:group-hover:top-3 xl:group-hover:right-3"
+      >
+        <DeleteIcon className="sm:p-1.5 p-1 border border-red-700 hover:bg-red-700 fill-red-700 hover:fill-white rounded-lg sm:w-8 md:w-10 w-7" />
+      </Button>
       <div
         className=" h-[12.5rem] border-b border-b-black mb-3 pb-1 overflow-y-auto [&::-webkit-scrollbar]:w-2
           [&::-webkit-scrollbar-track]:bg-transparent

@@ -9,7 +9,7 @@ export default function EmployeeAddPage() {
     <>
       <PageHeader
         title="Add Employee"
-        buttonLabel="BACK"
+        buttonLabel="Back"
         buttonOnClick={() => navigate("../employee-list")}
       />
       <EmployeeCreateForm/>

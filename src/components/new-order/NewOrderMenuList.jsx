@@ -54,7 +54,7 @@ const NewOrderMenuList = forwardRef(function NewOrderMenuList(
               type="button"
               onClick={toggleCart}
             >
-              GO TO CART
+              Go to Cart
             </Button>
           )}
           <Button
@@ -62,7 +62,7 @@ const NewOrderMenuList = forwardRef(function NewOrderMenuList(
             type="button"
             onClick={() => addFoodItemInCart(menuItem)}
           >
-            ADD TO CART
+            Add to Cart
           </Button>
         </div>
       </div>

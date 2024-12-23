@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Modal from "../UI/Modal";
 import { modalActions } from "../../store/modal-slice";
 import apiUrl from "../../apiUrl/ApiUrl";
+import defaultImage from "../../assets/default-image-preview.png";
 
 export default function RowTableFoodList({ food, deleteFood }) {
   const dispatch = useDispatch();
@@ -57,7 +58,7 @@ export default function RowTableFoodList({ food, deleteFood }) {
               src={
                 food.image
                   ? `${apiUrl.getFoodImage}${food.image}`
-                  : "../assets/default-image-preview.png"
+                  : defaultImage
               }
               alt={food.name}
               className="w-full h-full object-cover"

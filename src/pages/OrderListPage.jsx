@@ -74,25 +74,9 @@ export default function OrderListPage() {
   return (
     <>
       {orderLoading && <Loading fullHeightWidth />}
-      {/* {errorMessage && orderListId === "orderList" && (
-        <Modal open={isOpen} onClose={closeModal}>
-          <h1>Failed fetching data, on {orderListId}!</h1>
-          {errorMessage ? <p>{errorMessage}</p> : <p>Something went wrong!</p>}
-          <div className="modal-action p-2">
-            <Button
-              className="float-end button-primary sm:py-2 sm:px-4 es:py-1.5 es:px-3 py-2 px-2 text-xs es:text-sm sm:text-base rounded-lg"
-              type="button"
-              onClick={closeModal}
-            >
-              Close
-            </Button>
-          </div>
-        </Modal>
-      )} */}
-      {/* <ErrorModal/> */}
       {orderListId?.id === orderId && (
         <Modal open={isOpen} onClose={closeModal} className="overflow-visible">
-          <h1 className="text-center text-xl mb-2">Change The Order Status</h1>
+          <h1 className="text-center text-xl mb-2">Change the order status.</h1>
           <p className="mb-2">
             {" "}
             Order No: <strong>{orderListId?.orderNumber}</strong>
@@ -139,7 +123,7 @@ export default function OrderListPage() {
                 key={eachOrderItem.id}
                 deleteOrder={deleteOrder}
                 editStatus={editStatus}
-                orderRef={lastElementRef}
+                ref={lastElementRef}
               />
             )
           )

@@ -37,8 +37,8 @@ export default function FoodsListPage() {
   return (
     <>
       <PageHeader
-        title="All Food"
-        buttonLabel="ADD FOOD"
+        title="Foods"
+        buttonLabel="Add Food"
         buttonOnClick={() =>
           navigate("/admin/foods/add-food")
         }

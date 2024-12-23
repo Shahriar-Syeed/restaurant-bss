@@ -20,10 +20,11 @@ export default function CartWithDrawer() {
     dispatch(toggleCartDrawer());
   }
   function sentOrder(orders) {
+    // console.log(first)
     const updatedOrders = {
       ...orders,
       items: orders.items.map(({ foodImage, foodName, ...rest }) => rest),
-      orderNumber: new Date().toISOString(),
+      orderNumber: Math.floor(new Date().valueOf() / 1000).toString(),
       phoneNumber: "",
     };
     dispatch(createOrder(updatedOrders));
@@ -95,8 +96,9 @@ export default function CartWithDrawer() {
         </h3>
         <div className="pe-4">
           <Button
-            className="button button-primary rounded-lg w-full py-2 font-bold"
+            className={`${cartItems?.items?.length === 0 && 'bg-gray-600 cursor-none text-white'} ${cartItems?.items?.length !== 0 && 'button-primary'} rounded-lg w-full py-2 font-bold`}
             type="button"
+            disabled={cartItems?.items?.length === 0}
             onClick={() => sentOrder(cartItems)}
           >
             Confirm Order

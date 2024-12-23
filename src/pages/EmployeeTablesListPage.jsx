@@ -40,8 +40,8 @@ export default function EmployeeTablesListPage() {
     <>
       {isLoading && <Loading fullHeightWidth />}
       <PageHeader
-        title="All Table List"
-        buttonLabel="ADD TABLE"
+        title="Tables"
+        buttonLabel="Add Table"
         buttonOnClick={() => navigate("add-table")}
       />
       <div className="shadow-md sm:rounded-t-lg">

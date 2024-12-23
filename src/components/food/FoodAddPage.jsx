@@ -21,6 +21,7 @@ export default function FoodAddPage() {
   const [disableDiscountFields, setDisableDiscountFields] = useState(true);
   const [discountPrice, setDiscountPrice] = useState(0);
   const [discount, setDiscount] = useState(0);
+  const [discountError, setDiscountError] = useState('');
   const {
     formData,
     errors,
@@ -33,6 +34,7 @@ export default function FoodAddPage() {
       name: "",
       description: "",
       price: 0,
+      discountPrice: 0,
     },
     validateFoodEntry,
     ["price"]
@@ -68,7 +70,7 @@ export default function FoodAddPage() {
 
   function openSubmitConfirmation() {
     const validationError = validateFields();
-    if (!hasError() && Object.keys(validationError).length === 0) {
+    if (!hasError() && Object.keys(validationError).length === 0 && !discountError) {
       dispatch(modalActions.id({ id: null, text: "food-create-confirmation" }));
       dispatch(modalActions.open());
     }
@@ -94,11 +96,11 @@ export default function FoodAddPage() {
   function handleDiscountSelect(event) {
     console.log("selectedOption add food", selectedOption, event);
     if (event.sendingValue === 0) {
-      setDisableDiscountFields(() => true);
-      setDiscountPrice(() => 0);
-      setDiscount(() => 0);
+      setDisableDiscountFields(true);
+      setDiscountPrice(0);
+      setDiscount(0);
     } else {
-      setDisableDiscountFields(() => false);
+      setDisableDiscountFields(false);
     }
   }
 
@@ -125,9 +127,26 @@ export default function FoodAddPage() {
   }
   useEffect(() => {
     if (selectedOption?.sendingValue === 1) {
-      setDiscountPrice(() => price - discount);
+      const newDiscountPrice = price - discount;
+      if(newDiscountPrice < 0){
+        setDiscountError("Discount price can not be negative.")
+      }else{        
+        setDiscountError("");
+        setDiscountPrice(newDiscountPrice);
+      }      
     } else if (selectedOption?.sendingValue === 2) {
-      setDiscountPrice(() => price - price * (discount / 100));
+      const newDiscountPrice = price - price * (discount / 100);
+      if(newDiscountPrice < 0){
+        setDiscountError("Discount price can not be negative.")
+      }else{
+        
+        setDiscountError("");
+        setDiscountPrice(newDiscountPrice);
+      }
+    }  else {
+      setDisableDiscountFields(true);
+      setDiscountError("");
+      setDiscountPrice(0);
     }
   }, [discount, price, selectedOption]);
   useEffect(() => {
@@ -145,7 +164,7 @@ export default function FoodAddPage() {
     <>
       <PageHeader
         title="Add Food Item"
-        buttonLabel="BACK"
+        buttonLabel="Back"
         buttonOnClick={() => navigate("../")}
       />
       <form ref={formRef} className="bg-white">
@@ -184,7 +203,8 @@ export default function FoodAddPage() {
                 type="file"
                 hidden
                 id="image"
-                labelClass="absolute top-0 bottom-0 left-0 right-0 opacity-0 z-40 cursor-pointer"
+                name="image"
+                labelClass="absolute top-0 bottom-0 left-0 right-0 opacity-0 z-30 cursor-pointer"
                 onChange={onSelectFile}
               >
                 {""}
@@ -200,6 +220,7 @@ export default function FoodAddPage() {
           <div className="lg:col-start-1 lg:col-end-9 lg:row-start-1">
             <InputFloating
               id="name"
+              name="name"
               onChange={handleChange}
               onBlur={handleBlur}
             >
@@ -214,6 +235,7 @@ export default function FoodAddPage() {
           <div className="lg:col-start-1 lg:col-end-9 row-start-2 row-end-5">
             <TextAreaFloating
               id="description"
+              name="description"
               onChange={handleChange}
               onBlur={handleBlur}
             >
@@ -228,13 +250,14 @@ export default function FoodAddPage() {
           <div className="lg:col-start-1 lg:col-end-4 lg:row-start-5">
             <InputFloating
               id="price"
+              name="price"
               onChange={(e) => {
                 setPrice(e.target.value);
                 handleChange(e);
               }}
               onBlur={handleBlur}
               value={formData.price}
-            >
+              >
               Price
             </InputFloating>
             {errors?.price && (
@@ -247,16 +270,19 @@ export default function FoodAddPage() {
           <div className="lg:col-start-4 lg:col-end-7 lg:row-start-5">
             <CustomSelect
               id="discountType"
+              name="discountType"
               label="Select Discount Type"
               options={discountOption}
               onChanged={(e) => handleDiscountSelect(e)}
               maximumHeight="60"
+              optionSelected='None'
             />
           </div>
 
           <div className="lg:col-start-7 lg:col-end-10 lg:row-start-5">
             <InputFloating
               id="discount"
+              name="discount"
               type="number"
               disabled={disableDiscountFields}
               value={discount}
@@ -264,17 +290,30 @@ export default function FoodAddPage() {
             >
               Discount in (&#2547;){" "}
             </InputFloating>
+            {discountError && (
+              <span className="absolute text-xs text-red-600 py-0.5 ps-3">
+                Correct the discount.
+              </span>
+            )}
           </div>
 
-          <div className="lg:col-start-10 lg:col-end-13 lg:row-start-5">
+          <div className="lg:col-start-10 lg:col-end-13 lg:row-start-5 relative">
             <InputFloating
+              id="discountPrice"
               name="discountPrice"
               type="number"
               disabled={true}
               value={discountPrice}
+              errorClassName="absolute text-xs text-red-600 py-0.5 ps-3"
+              error={errors?.discountPrice }
             >
               Discount Price
             </InputFloating>
+              {discountError && (
+                <span className="absolute text-xs text-red-600 py-0.5 ps-3">
+                  {discountError}
+                </span>
+              )}
           </div>
 
           <div className="lg:col-start-1 lg:-col-end-1 pt-1">
@@ -283,7 +322,7 @@ export default function FoodAddPage() {
               className="button-primary w-full py-2 text-white rounded "
               onClick={openSubmitConfirmation}
             >
-              SUBMIT
+              Submit
             </Button>
           </div>
         </div>

@@ -47,15 +47,15 @@ export default function EmployeeListPage() {
   return (
     <>
       <PageHeader
-        title="All Employee"
-        buttonLabel="ADD EMPLOYEE"
+        title="Employees"
+        buttonLabel="Add Employee"
         buttonOnClick={() =>
           navigate("/admin/employee/employee-add")
         }
       />
 
       <div className="overflow-x-auto shadow-md sm:rounded-t-lg">
-        <table className="w-full text-left rtl:text-right text-gray-900 text-xs sm:text-sm lg:text-base ">
+        <table className="w-full text-left rtl:text-right text-gray-900 text-xs es:text-sm sm:text-base ">
           <thead className="text-xs text-primary uppercase bg-gray-50 hidden sm:table-header-group">
             <tr>
               {HEADING?.map((heading) => (

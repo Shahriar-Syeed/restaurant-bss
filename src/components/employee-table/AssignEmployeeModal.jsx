@@ -43,7 +43,7 @@ export default function AssignEmployeeModal({
 
   return (
     <>
-      <Modal open={isOpen} onClose={closeModal} className=" overflow-unset">
+      <Modal open={isOpen} onClose={closeModal} className="overflow-unset">
         <Button
           className="button-primary sm:px-3 sm:py-1.5 px-2 py-1 rounded-lg absolute right-3 top-3 font-extrabold border-solid border-2 border-primary"
           onClick={closeModal}
@@ -53,7 +53,7 @@ export default function AssignEmployeeModal({
         </Button>
 
         <h1 className="text-center sm:text-xl font-bold mb-3">
-          Assign Employee To a Table
+          Assign Employee To <span className="font-extrabold text-rose-950 underline">{info.tableNumber}</span>
         </h1>
 
         <div className="grid grid-col-6 lg:gap-4 md:gap-3.5 sm:gap-3 gap-2.5">
@@ -71,11 +71,8 @@ export default function AssignEmployeeModal({
             </div>
           </div>
           <div className="sm:col-start-4 col-start-1 col-end-7 flex flex-col justify-center gap-3 text-center lg:text-left">
-            <h2 className="sm:text-xl font-semibold lg:mb-3">
-              Table Number: {info.tableNumber}
-            </h2>
             <h2 className="sm:text-xl font-semibold">
-              Seats Number: {info.numberOfSeats}
+              Total seats: {info.numberOfSeats}
             </h2>
           </div>
 
@@ -88,7 +85,7 @@ export default function AssignEmployeeModal({
             />
           </div>
           <Button
-            className="button-primary sm:py-2 sm:px-4 es:py-1.5 es:px-3 py-2 px-2 text-xs es:text-sm sm:text-base rounded-lg lg:col-start-5 col-start-6 col-end-7 self-center"
+            className="bg-lime-800 hover:bg-lime-900 active:bg-lime-950 text-white font-bold sm:py-2 sm:px-4 es:py-1.5 es:px-3 py-2 px-2 text-xs es:text-sm sm:text-base rounded-lg lg:col-start-5 col-start-6 col-end-7 self-center"
             onClick={() => handleAssignEmployee(info)}
             type="button"
           >

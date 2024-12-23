@@ -63,7 +63,7 @@ export default function EmployeeEditPage() {
       {isLoading && <Loading fullHeightWidth />}
       <PageHeader
         title="Edit Employee"
-        buttonLabel="BACK"
+        buttonLabel="Back"
         buttonOnClick={() => navigate("../employee-list")}
       />
       <section className="bg-white p-3 sm:p-4 md:p-6 lg-p-8 xl:p-10 2xl:p-12 rounded-lg grid sm:grid-cols-2 gap-3">

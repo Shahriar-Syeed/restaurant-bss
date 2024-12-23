@@ -53,7 +53,7 @@ export default function LoginForm() {
               required
               id="password"
               name="password"
-              className="h-6 leading-6 p-3"
+              className="h-6 leading-6 p-0.5"
               eyeButton
               value={loginData.password}
               onChange={(event) => handleChange(event)}
@@ -63,15 +63,15 @@ export default function LoginForm() {
           </div>
           <Button
             type="submit"
-            className="w-full text-white sm:py-2 sm:px-4 py-1.5 px-3 button-primary rounded uppercase mb-5 tracking-2px"
+            className="w-full text-white sm:py-2 sm:px-4 py-1.5 px-3 button-primary rounded  mb-5 tracking-2px"
           >
-            LOGIN
+            Login
           </Button>
           <Link
             to="/"
-            className="w-full text-red-600 px-4 font-medium rounded capitalize tracking-2px"
+            className="w-full text-red-600 px-2 font-medium rounded tracking-2px"
           >
-            Back To Home
+            Back to Home
           </Link>
         </form>
       </div>

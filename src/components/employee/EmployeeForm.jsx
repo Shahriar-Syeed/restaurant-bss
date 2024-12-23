@@ -188,7 +188,7 @@ export default function EmployeeForm() {
                 required
                 id="image"
                 name="image"
-                labelClass="absolute top-0 bottom-0 left-0 right-0 opacity-0 z-40 cursor-pointer"
+                labelClass="absolute top-0 bottom-0 left-0 right-0 opacity-0 z-30 cursor-pointer"
                 onChange={onSelectFile}
               >{``}</Input>
               <div className="max-w-36 h-36 overflow-hidden rounded-lg">
@@ -392,7 +392,7 @@ export default function EmployeeForm() {
               className="button-primary w-full py-2 text-white rounded"
               onClick={openModal}
             >
-              SUBMIT
+              Submit
             </Button>
           </div>
         </div>

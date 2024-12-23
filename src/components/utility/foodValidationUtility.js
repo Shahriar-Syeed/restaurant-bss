@@ -30,6 +30,12 @@
       }
       break;
 
+    case "discountPrice":
+      if (value<0) {
+        error = "Can not be negative.";
+      }
+      break;
+
     default:
       break;
   }

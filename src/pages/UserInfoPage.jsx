@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import adminImage from "../assets/admin.png";
+import defaultUserImage from "../assets/default-user-image.webp";
+import apiUrl from "../apiUrl/ApiUrl.jsx";
 
 export default function UserInfoPage() {
   const [user, setUser] = useState({});
@@ -17,7 +18,7 @@ export default function UserInfoPage() {
       <div className="bg-white shadow-lg  rounded-xl w-fit flex flex-col justify-center items-center gap-3 p-4">
         <div className="rounded-xl w-36 overflow-clip">
           <img
-            src={adminImage}
+            src={user.image === null ? defaultUserImage : `${apiUrl.getImage}${user.image}`}
             alt=""
             className="rounded-lg h-full w-full object-cover "
           />

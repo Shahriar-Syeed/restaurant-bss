@@ -13,13 +13,13 @@ export default function PageHeader({ title, buttonLabel, buttonOnClick }) {
           onClick={buttonOnClick}
           type="button"
         >
-          {buttonLabel === "BACK" && (
+          {buttonLabel === "Back" && (
             <>
               <BackIcon className="w-3 md:w-3.5 lg:w-5" />
               <span className="hidden es:inline">{buttonLabel}</span>
             </>
           )}
-          {buttonLabel !== "BACK" && buttonLabel}
+          {buttonLabel !== "Back" && buttonLabel}
         </Button>
       )}
     </div>

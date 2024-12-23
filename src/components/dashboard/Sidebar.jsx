@@ -9,6 +9,8 @@ import OrderIcon from "../svg/OrderIcon.jsx";
 import NewOrderIcon from "../svg/NewOrderIcon.jsx";
 import FoodIcon from "../svg/FoodIcon.jsx";
 import TableIcon from "../svg/TableIcon.jsx";
+import defaultUserImage from "../../assets/default-user-image.webp";
+import apiUrl from "../../apiUrl/ApiUrl.jsx";
 
 export default function Sidebar() {
   const [showSidebar, setShowSidebar] = useState();
@@ -71,7 +73,7 @@ export default function Sidebar() {
       >
         <div className="h-6 w-6 rounded-lg overflow-hidden">
           <img
-            src={adminImage}
+            src={userInfo.image === null ? defaultUserImage : `${apiUrl.getImage}${userInfo.image}`}
             alt="User Image"
             className="w-full object-cover"
           />
@@ -91,11 +93,11 @@ export default function Sidebar() {
             <li className="hidden sm:list-item">
               <Link
                 to="/admin"
-                className="flex items-center p-2 text-primary rounded-lg text-primary"
+                className="flex items-center p-2 rounded-lg text-stone-800"
               >
                 <div className="h-10 w-10 rounded-50 overflow-hidden">
                   <img
-                    src={adminImage}
+                    src={userInfo.image === null ? defaultUserImage : `${apiUrl.getImage}${userInfo.image}`}
                     alt="User Image"
                     className="w-full object-cover"
                   />

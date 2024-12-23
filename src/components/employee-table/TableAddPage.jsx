@@ -152,7 +152,7 @@ export default function TableAddPage() {
       )}
       <PageHeader
         title="Add Table"
-        buttonLabel="BACK"
+        buttonLabel="Back"
         buttonOnClick={() => navigate("../")}
       />
       <form onSubmit={handleSubmit} className="bg-white">
@@ -167,7 +167,7 @@ export default function TableAddPage() {
                 type="file"
                 hidden
                 id="image"
-                labelClass="absolute top-0 bottom-0 left-0 right-0 opacity-0 z-40 cursor-pointer"
+                labelClass="absolute top-0 bottom-0 left-0 right-0 opacity-0 z-30 cursor-pointer"
                 onChange={onSelectFile}
               >
                 {""}
@@ -206,7 +206,7 @@ export default function TableAddPage() {
               type="submit"
               className="button-primary w-full py-2 text-white rounded "
             >
-              SUBMIT
+              Submit
             </Button>
           </div>
         </div>
