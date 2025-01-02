@@ -11,7 +11,7 @@ export default function RootAdminDashboardLayout() {
           <div className="items-stretch self-stretch flex-grow flex gap-1">
             <Link
               to="/admin"
-              className="button-primary--dark cursor-pointer py-3 rounded-md px-6 hidden"
+              className="hidden button-primary--dark cursor-pointer py-3 rounded-md px-6"
             >
               Admin
             </Link>

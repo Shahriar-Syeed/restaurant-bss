@@ -31,6 +31,7 @@ export default function FoodAddPage() {
     hasError,
   } = useFormValidation(
     {
+      image: "",
       name: "",
       description: "",
       price: 0,
@@ -68,14 +69,15 @@ export default function FoodAddPage() {
     dispatch(modalActions.close());
   }
 
-  function openSubmitConfirmation() {
-    const validationError = validateFields();
+  async function openSubmitConfirmation() {
+    const validationError = await validateFields();
     if (!hasError() && Object.keys(validationError).length === 0 && !discountError) {
       dispatch(modalActions.id({ id: null, text: "food-create-confirmation" }));
       dispatch(modalActions.open());
     }
   }
   function onSelectFile(event) {
+    handleChange(event);
     if (!event.target.files || event.target.files.length === 0) {
       return;
     }
@@ -192,7 +194,7 @@ export default function FoodAddPage() {
             </div>
           </Modal>
         )}
-        <div className="grid lg:grid-cols-12 lg:gap-4 gap-5 bg-white xl:p-10 lg:p-8 md:p-6 sm:p-4 p-3 rounded">
+        <div className="grid lg:grid-cols-12 gap-6 bg-white xl:p-10 lg:p-8 md:p-6 sm:p-4 p-3 rounded">
           <div
             className="lg:col-start-9 lg:col-end-13 lg:row-start-1 lg:row-span-4 border-dashed border border-gray-200 hover:border-gray-400 relative min-h-36 rounded"
             onDragOver={(e) => e.preventDefault()}
@@ -216,6 +218,11 @@ export default function FoodAddPage() {
                 />
               </div>
             </div>
+            {errors?.image && (
+              <span className="absolute text-xs text-red-600 py-0.5 ps-3">
+                {errors?.image}
+              </span>
+            )}
           </div>
           <div className="lg:col-start-1 lg:col-end-9 lg:row-start-1">
             <InputFloating

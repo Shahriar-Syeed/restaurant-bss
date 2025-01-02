@@ -27,10 +27,20 @@ export default function useFormValidation(
         sanitizedValue,
         formData
       );
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        [name]: error || "",
-      }));
+
+      if (error instanceof Promise) {
+        error.then((resolvedError) => {
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            [name]: resolvedError || "",
+          }));
+        });
+      } else {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: error || "",
+        }));
+      }
     }
   };
 
@@ -43,28 +53,47 @@ export default function useFormValidation(
     }));
     const error = validateInput(name, value, formData );
     console.log(error);
-    setErrors((prevErrors) => ({
-      ...prevErrors,
-      [name]: error || "",
-    }));
+    if (error instanceof Promise) {
+      error.then((resolvedError) => {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          [name]: resolvedError || "",
+        }));
+      });
+    } else {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: error || "",
+      }));
+    }
   };
-
-  const validateFields = () => {
-    
+  const validateFields = async () => {
     const finalErrors = {};
     const updatedTouched = {};
-    Object.keys(formData).forEach((field) => {
+
+    // Collect promises if validateInput is asynchronous.
+    const validationPromises = Object.keys(formData).map((field) => {
+      updatedTouched[field] = true;
       const fieldError = validateInput(field, formData[field], formData);
-      if (fieldError) {
+
+      if (fieldError instanceof Promise) {
+        return fieldError.then((resolvedError) => {
+          if (resolvedError) finalErrors[field] = resolvedError;
+        });
+      } else if (fieldError) {
         finalErrors[field] = fieldError;
       }
-      updatedTouched[field] = true;
     });
-    console.log(finalErrors);
+
+    // Await all validations.
+    await Promise.all(validationPromises);
+
     setErrors(finalErrors);
     setTouched(updatedTouched);
+
     return finalErrors;
   };
+ 
   const hasError = () => Object.values(errors).some((error) => error !== "");
 
   return {

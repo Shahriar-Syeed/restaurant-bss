@@ -65,7 +65,7 @@ export const createEmployee = (formData) => {
     };
     console.log("updatedData", updatedData);
     try {
-      const response = await api.post("Employee/create", updatedData);
+      const response = await api.post("Employee/creat", updatedData);
       dispatch(employeeActions.setStatus(response.status));
       console.log("createResult", response);
       if (response.status === 200) {
@@ -75,7 +75,7 @@ export const createEmployee = (formData) => {
       }
       return response;
     } catch (error) {
-      dispatch(modalActions.id("employee-create-error"));
+      dispatch(modalActions.id("Employee create error!"));
       dispatch(employeeActions.loading(false));
       dispatch(employeeActions.errorMessage(error.message));
       dispatch(modalActions.open());

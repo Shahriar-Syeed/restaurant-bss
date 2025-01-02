@@ -2,6 +2,12 @@
   let error = "";
 
   switch (name) {
+    case "image":
+      console.log(value);
+      if(value.length === 0){
+        error = "Upload an image.";
+      }
+      break;
     case "name":
       if (!value.trim()) {
         error = "Food name require.";

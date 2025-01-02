@@ -43,7 +43,7 @@ export default function EmployeeEditPage() {
 
   async function handleEdit(e) {
     e.preventDefault();
-    const validationError = validateFields();
+    const validationError = await validateFields();
     if (!hasError() && Object.keys(validationError).length === 0) {
       if (window.confirm("Do you really want to change designation?")) {
         try {

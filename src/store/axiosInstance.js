@@ -1,4 +1,5 @@
 import axios from "axios";
+// import { redirect } from "react-router-dom";
 
 export const api = axios.create({
   baseURL: "https://restaurantapi.bssoln.com/api/",
@@ -45,6 +46,7 @@ api.interceptors.response.use(
         }
       } catch (refreshError) {
         console.error("Token refresh failed", refreshError);
+        window.location.href = '/login'; 
         throw refreshError;
       }
     }

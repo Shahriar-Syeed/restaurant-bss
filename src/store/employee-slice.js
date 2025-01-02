@@ -5,6 +5,7 @@ const initialEmployees = {
   selectedEmployeeImage: undefined,
   preview: undefined,
   status: null,
+  isPhoneNoExist: false,
   loading: false,
   error: null,
 };
@@ -27,6 +28,9 @@ const employeeSlice = createSlice({
     },
     loading(state, action) {
       state.loading = action.payload;
+    },
+    setExistPhone(state, action) {
+      state.isPhoneNoExist = action.payload;
     },
     errorMessage(state, action) {
       state.error = action.payload;

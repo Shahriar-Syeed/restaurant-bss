@@ -138,7 +138,7 @@ export default function RowEmployeeTableList({
             {tableInfoData?.employees?.map((emp) => (
               <li className="w-fit sm:w-auto" key={emp["employeeTableId"]}>
                 <div className="inline-flex items-center whitespace-nowrap bg-stone-100 hover:bg-stone-200 rounded-2xl p-1 mb-1 ">
-                  <span className="p-0.5">{emp.name}</span>
+                  <span className="p-0.5 sm:p-1 leading-none">{emp.name}</span>
                   <Button
                     textOnly={true}
                     className="rounded-50 h-6 w-6 grid place-items-center text-stone-400 hover:text-red-500 stroke-transparent"

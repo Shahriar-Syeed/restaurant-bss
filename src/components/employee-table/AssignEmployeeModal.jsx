@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { postAssignEmployeesTable } from "../../store/employee-tables-actions";
 import { employeeSelectActions } from "../../store/employee-select-slice.js";
 import apiUrl from "../../apiUrl/ApiUrl.jsx";
+import EmployeeSelectWithSearch from "../UI/EmployeeSelectWithSearch.jsx";
 
 export default function AssignEmployeeModal({
   closeModal,
@@ -77,7 +78,7 @@ export default function AssignEmployeeModal({
           </div>
 
           <div className="col-start-1 lg:col-end-5 col-end-6">
-            <EmployeeSelect
+            <EmployeeSelectWithSearch
               name="employeeId"
               label="Select Employee"
               options={employeesToAssign}

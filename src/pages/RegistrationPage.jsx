@@ -30,6 +30,7 @@ export default function RegistrationPage() {
     hasError,
   } = useFormValidation(
     {
+      image:"",
       userName: "",
       firstName: "",
       middleName: "",
@@ -64,8 +65,8 @@ export default function RegistrationPage() {
   const modalId = useSelector((state) => state.modal.id);
   const isOpen = useSelector((state) => state.modal.open);
 
-  function openModal() {
-    const validationError = validateFields();
+  async function openModal() {
+    const validationError = await validateFields();
     if (!hasError() && Object.keys(validationError).length === 0) {
       dispatch(modalActions.id("user-create-confirmation"));
       dispatch(modalActions.open());
@@ -78,6 +79,7 @@ export default function RegistrationPage() {
   }
 
   function onSelectFile(event) {
+    handleChange(event);
     if (!event.target.files || event.target.files.length === 0) {
       return;
     }
@@ -211,6 +213,7 @@ export default function RegistrationPage() {
                       name="image"
                       labelClass="absolute top-0 bottom-0 left-0 right-0 opacity-0 z-30 cursor-pointer"
                       onChange={onSelectFile}
+                      onBlur={handleBlur}
                     >{``}</Input>
                     <div className="max-w-36 h-36 overflow-hidden rounded-lg">
                       <img
@@ -220,6 +223,11 @@ export default function RegistrationPage() {
                     </div>
                   </div>
                 </div>
+                {errors?.image && (
+              <span className="absolute text-xs text-red-600 py-0.5 ps-3">
+                {errors?.image}
+              </span>
+            )}
                 <div className="lg:col-start-1 lg:col-end-9 lg:row-start-1 relative">
                   <InputFloating
                     id="userName"

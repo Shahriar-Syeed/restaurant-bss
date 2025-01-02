@@ -118,7 +118,7 @@ const EmployeeSelect = ({
       </div>
 
       {isOpen && (
-        <ul className="absolute z-20 w-full bg-white border border-gray-300 rounded shadow-md mt-1 max-h-24 overflow-y-auto [&::-webkit-scrollbar]:w-2
+        <ul className="absolute z-20 w-full bg-white border border-gray-300 rounded shadow-md mt-1 max-h-24 sm:max-h-32 bottom-105 overflow-y-auto [&::-webkit-scrollbar]:w-2
           [&::-webkit-scrollbar-track]:bg-neutral-700
           [&::-webkit-scrollbar-thumb]:bg-neutral-400">
           {options?.map((option) => (

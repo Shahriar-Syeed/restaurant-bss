@@ -60,9 +60,9 @@ export default function NewOrderPage() {
       {(tableLoading || foodLoading) && <Loading fullHeightWidth />}
       <PageHeader title="Order Food" />
       <div className="grid lg:grid-cols-4 lg:gap-4 md:gap-3.5 sm:gap-3 gap-2.5">
-        <section className="lg:col-end-2 pt-3 lg:pb-3 bg-white rounded-lg overflow-hidden">
-          <header>
-            <h2 className="font-semibold text-lg text-center mb-3">
+        <section className="lg:col-end-2 bg-white rounded-lg overflow-hidden">
+          <header className="pt-3 lg:pb-2 mb-1 bg-stone-800">
+            <h2 className="font-semibold text-center text-white">
               SELECT A TABLE{` (${tableCount})`}
             </h2>
           </header>
@@ -84,7 +84,7 @@ export default function NewOrderPage() {
             ))}
           </div>
         </section>
-        <section className="lg:col-start-2 lg:col-end-5 p-3 bg-white rounded-lg relative">
+        <section className="lg:col-start-2 lg:col-end-5 bg-white rounded-lg relative">
           {!selectedTableId && (
             <div className="absolute bg-white bg-opacity-80 inset-0 rounded-lg">
               <div className="font-bold p-4 border-4 border-dashed border-red-700 text-red-950 rounded-t-lg h-40 text-center text-2xl flex items-center justify-center flex-col bg-white gap-3">
@@ -93,7 +93,7 @@ export default function NewOrderPage() {
               </div>
             </div>
           )}
-          <h1 className="text-md font-semibold text-center">
+          <h1 className="text-md font-semibold text-center pt-3 lg:pb-2 bg-stone-800 text-white rounded-t-lg mb-1">
             Add foods to the selected table.
           </h1>
           <div className="flex flex-col gap-2 viewport-hight pb-3 lg:pb-0 overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-gray-300  [&::-webkit-scrollbar-thumb]:bg-gray-700 [&::-webkit-scrollbar-thumb]:rounded">

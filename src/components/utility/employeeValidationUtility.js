@@ -1,7 +1,17 @@
-const validateEmployeeEntry = (name, value, formData) => {
+import { checkPhoneNumberExist } from "../../store/exist-phone-actions";
+
+
+
+const validateEmployeeEntry = async (name, value, formData) => {
   let error = "";
 
   switch (name) {
+    case "image":
+      if(value.files.length === 0){
+        error = "Upload an image.";
+      }
+      break;
+
     case "firstName":
       if (!value.trim()) {
         error = "First name is required.";
@@ -70,20 +80,21 @@ const validateEmployeeEntry = (name, value, formData) => {
       break;
 
     case "email":
-      const emailRegex = /^[a-zA-Z0–9._-]+@[a-zA-Z0–9.-]+\.[a-zA-Z]{2,4}$/;
       if (!value.trim()) {
         error = "Email is required.";
-      } else if (!emailRegex.test(value)) {
+      } else if (!/^[a-zA-Z0–9._-]+@[a-zA-Z0–9.-]+\.[a-zA-Z]{2,4}$/.test(value)) {
         error = "Invalid email address.";
       }
       break;
 
     case "phoneNumber":
-      const phoneRegex = /^[0-9]{11}$/;
+
       if (!value.trim()) {
         error = "Phone number is required.";
-      } else if (!phoneRegex.test(value.trim().replace(/\D/g, ""))) {
+      } else if (!/^[0-9]{11}$/.test(value.trim().replace(/\D/g, ""))) {
         error = "Must be 11 digits.";
+      } else if(await checkPhoneNumberExist(value.trim())) {
+        error = "Phone number already exists.";
       }
       break;
 
@@ -120,18 +131,16 @@ const validateEmployeeEntry = (name, value, formData) => {
       break;
 
     case "nid":
-      const nidRegex = /^(?:\d{10}|\d{17})$/;
       if (!value) {
         error = "NID is required.";
-      } else if (!nidRegex.test(value)) {
+      } else if (!/^(?:\d{10}|\d{17})$/.test(value)) {
         error = "10 or 17 digits.";
       }
       break;
     case "password":
-      const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
       if (!value.trim()) {
         error = "Password is required.";
-      } else if (!passwordRegex.test(value)) {
+      } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(value)) {
         error = "8 chars include 1 letter & 1 number.";
       }
       break;

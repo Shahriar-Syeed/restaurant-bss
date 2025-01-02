@@ -3,7 +3,7 @@
 export default function Loading({fullHeightWidth}) {
   return (
     <>
-    <div className={`fixed ${!fullHeightWidth?'w-dvw h-dvh top-0 left-0':'top-sm-80px top-72px left-xl-256px left-0 bottom-0 right-0'} bg-slate-400/40 z-20`}>
+    <div className={`fixed ${!fullHeightWidth?'w-dvw h-dvh top-0 left-0':'top-72px left-xl-256px left-0 bottom-0 right-0'} bg-slate-400/40 z-20`}>
       <div className={`absolute w-24 h-24 -translate-x-1/2 -translate-y-1/2 bg-transparent top-1/2 left-1/2 z-50 `}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
