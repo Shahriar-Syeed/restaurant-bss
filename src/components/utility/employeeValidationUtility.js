@@ -7,7 +7,7 @@ const validateEmployeeEntry = async (name, value, formData) => {
 
   switch (name) {
     case "image":
-      if(value.files.length === 0){
+      if(value.length === 0){
         error = "Upload an image.";
       }
       break;
