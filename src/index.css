@@ -194,11 +194,11 @@ table td[data-th]:before {
   }
 }
 
-@media (hover: none) {
+@media (pointer: coarse), (hover: none) {
   [title] {
     position: relative;
   }
-  [title]:focus-within::after {
+  [title]:focus::after {
     content: attr(title);
     position: absolute;
     top: 0;
