@@ -82,7 +82,7 @@ const validateEmployeeEntry = async (name, value, formData) => {
     case "email":
       if (!value.trim()) {
         error = "Email is required.";
-      } else if (!/^[a-zA-Z0–9._-]+@[a-zA-Z0–9.-]+\.[a-zA-Z]{2,4}$/.test(value)) {
+      } else if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(value)) {
         error = "Invalid email address.";
       }
       break;
