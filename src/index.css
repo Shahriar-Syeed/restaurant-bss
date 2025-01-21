@@ -193,3 +193,22 @@ table td[data-th]:before {
     display: none;
   }
 }
+
+@media (hover: none) {
+  [title] {
+    position: relative;
+  }
+  [title]:focus-within::after {
+    content: attr(title);
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #000;
+    background-color: #fff;
+    border: 1px solid;
+    width: fit-content;
+    padding: 3px;
+    font-size: 10px;
+  }
+
+}

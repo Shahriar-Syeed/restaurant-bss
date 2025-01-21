@@ -54,8 +54,8 @@ export default function EmployeeListPage() {
         }
       />
 
-      <div className="overflow-x-auto shadow-md sm:rounded-t-lg">
-        <table className="w-full text-left rtl:text-right text-gray-900 text-xs es:text-sm sm:text-base ">
+      <div className="shadow-md sm:rounded-t-lg">
+        <table className="w-full text-left rtl:text-right text-gray-900 text-xs es:text-sm sm:text-base table-fixed">
           <thead className="text-xs text-primary uppercase bg-gray-50 hidden sm:table-header-group">
             <tr>
               {HEADING?.map((heading) => (
