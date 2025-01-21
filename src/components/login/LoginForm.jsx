@@ -64,6 +64,7 @@ export default function LoginForm() {
           <Button
             type="submit"
             className="w-full text-white sm:py-2 sm:px-4 py-1.5 px-3 button-primary rounded  mb-5 tracking-2px"
+            disabled={isLoading}
           >
             Login
           </Button>

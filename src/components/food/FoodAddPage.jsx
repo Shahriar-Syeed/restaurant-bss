@@ -47,6 +47,7 @@ export default function FoodAddPage() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.foods.loading);
   const selectedFoodImage = useSelector(
     (state) => state.foods.selectedFoodImage
   );
@@ -188,6 +189,7 @@ export default function FoodAddPage() {
                 className="button-primary sm:py-2 sm:px-4 es:py-1.5 es:px-3 py-2 px-2 text-xs es:text-sm sm:text-base rounded-lg"
                 type="button"
                 onClick={handleSubmit}
+                disabled={isLoading}
               >
                 Confirm
               </Button>
@@ -328,6 +330,7 @@ export default function FoodAddPage() {
               type="button"
               className="button-primary w-full py-2 text-white rounded "
               onClick={openSubmitConfirmation}
+              disabled={isLoading}
             >
               Submit
             </Button>

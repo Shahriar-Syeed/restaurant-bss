@@ -98,7 +98,7 @@ export default function CartWithDrawer() {
           <Button
             className={`${cartItems?.items?.length === 0 && 'bg-gray-600 cursor-none text-white'} ${cartItems?.items?.length !== 0 && 'button-primary'} rounded-lg w-full py-2 font-bold`}
             type="button"
-            disabled={cartItems?.items?.length === 0}
+            disabled={cartItems?.items?.length === 0 || cartLoading}
             onClick={() => sentOrder(cartItems)}
           >
             Confirm Order
