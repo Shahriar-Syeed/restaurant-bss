@@ -76,6 +76,7 @@ export default function RowTableEmployeeList({ deleteEmployee }) {
               <span
                 className="whitespace-nowrap overflow-clip text-ellipsis min-w-12 max-w-full inline-block"
                 title={employee.user.fullName}
+                tabIndex="0"
               >
                 {employee.user.fullName}
               </span>
