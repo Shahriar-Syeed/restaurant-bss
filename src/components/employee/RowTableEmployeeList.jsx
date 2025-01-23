@@ -69,6 +69,7 @@ export default function RowTableEmployeeList({ deleteEmployee }) {
           </th>
           <td
             className="block sm:table-cell md:px-2 xl:px-4 xl:py-3 lg:px-3 lg:py-2 p-1 whitespace-nowrap overflow-clip text-ellipsis min-w-14"
+            tabIsndex="0"
             data-th="Name: "
             title={employee.user.fullName}
           >
@@ -76,6 +77,7 @@ export default function RowTableEmployeeList({ deleteEmployee }) {
           </td>
           <td
             className="block sm:table-cell md:px-2 xl:px-4 xl:py-3 lg:px-3 lg:py-2 p-1 whitespace-nowrap overflow-clip text-ellipsis min-w-14"
+            tabIsndex="0"
             data-th="Email: "
             title={employee.user.email}
           >
@@ -83,6 +85,7 @@ export default function RowTableEmployeeList({ deleteEmployee }) {
           </td>
           <td
             className="block sm:table-cell md:px-2 xl:px-4 xl:py-3 lg:px-3 lg:py-2 p-1 whitespace-nowrap overflow-clip text-ellipsis min-w-14"
+            tabIsndex="0"
             data-th="Phone: "
             title={employee.user.phoneNumber}
           >
@@ -90,6 +93,7 @@ export default function RowTableEmployeeList({ deleteEmployee }) {
           </td>
           <td
             className="block sm:table-cell md:px-2 xl:px-4 xl:py-3 lg:px-3 lg:py-2 p-1 whitespace-nowrap overflow-clip text-ellipsis min-w-14"
+            tabIsndex="0"
             data-th="Join Date: "
             title={employee.joinDate}
           >
@@ -97,6 +101,7 @@ export default function RowTableEmployeeList({ deleteEmployee }) {
           </td>
           <td
             className="block sm:table-cell md:px-2 xl:px-4 xl:py-3 lg:px-3 lg:py-2 p-1 whitespace-nowrap overflow-clip text-ellipsis min-w-14"
+            tabIsndex="0"
             data-th="Designation: "
             title={employee.designation}
           >
