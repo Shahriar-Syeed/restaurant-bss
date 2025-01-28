@@ -1,4 +1,4 @@
-import Logo from "../assets/logo-icon.png";
+import Logo from "/logo-icon.png";
 
 export default function Navbar({ children, className }) {
   return (
