@@ -1,6 +1,7 @@
-import Logo from "/logo-icon.png";
+import Logo from "../assets/logoIcon.png";
 
 export default function Navbar({ children, className }) {
+  // const logo = "/logo-icon.png";
   return (
     <>
       <nav className="bg-primary top-0 z-20">

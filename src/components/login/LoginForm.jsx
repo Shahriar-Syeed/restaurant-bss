@@ -1,5 +1,5 @@
 import Input from "../UI/Input.jsx";
-import Logo from "/logo-icon.png";
+import Logo from "../../assets/logoIcon.png";
 import Button from "../UI/Button.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
