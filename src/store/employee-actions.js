@@ -65,7 +65,7 @@ export const createEmployee = (formData) => {
     };
     console.log("updatedData", updatedData);
     try {
-      const response = await api.post("Employee/creat", updatedData);
+      const response = await api.post("Employee/create", updatedData);
       dispatch(employeeActions.setStatus(response.status));
       console.log("createResult", response);
       if (response.status === 200) {
