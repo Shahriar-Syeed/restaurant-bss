@@ -1,6 +1,6 @@
 const apiUrl = {
-  getImage: "https://restaurantapi.bssoln.com/images/user/",
-  getFoodImage: "https://restaurantapi.bssoln.com/images/food/",
-  getTableImage: "https://restaurantapi.bssoln.com/images/table/",
+  getImage: "https://bssrms.runasp.net/images/user/",
+  getFoodImage: "https://bssrms.runasp.net/images/food/",
+  getTableImage: "https://bssrms.runasp.net/images/table/",
 };
 export default apiUrl;
