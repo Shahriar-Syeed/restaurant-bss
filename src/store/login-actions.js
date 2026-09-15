@@ -17,7 +17,7 @@ export const submitLogin = (formData) => {
     dispatch(loginActions.loading(true));
     try {
       const response = await axios.post(
-        `https://restaurantapi.bssoln.com/api/Auth/SignIn`,
+        `https://bssrms.runasp.net/api/Auth/SignIn`,
         formData
       );
       if (response.status === 200) {
