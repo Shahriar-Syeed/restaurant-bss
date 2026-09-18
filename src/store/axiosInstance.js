@@ -1,5 +1,6 @@
 import axios from "axios";
 // import { redirect } from "react-router-dom";
+import apiUrl from "../../apiUrl/ApiUrl.jsx";
 
 export const api = axios.create({
   baseURL: "https://restaurantapi.bssoln.com/api/",
@@ -27,7 +28,7 @@ api.interceptors.response.use(
       originalRequest._retry = true;
       try {
         const refreshResponse = await axios.post(
-          "https://restaurantapi.bssoln.com/api/Auth/refreshToken",
+          `${apiUrl.baseApi}Auth/refreshToken`,
           {
             refreshToken: sessionStorage.getItem("refreshToken"),
           }

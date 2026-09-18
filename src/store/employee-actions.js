@@ -1,6 +1,7 @@
 import { employeeActions } from "./employee-slice";
 import { modalActions } from "./modal-slice";
 import { api } from "./axiosInstance";
+import apiUrl from "../../apiUrl/ApiUrl.jsx";
 
 export const getEmployees = (page, perPage) => {
   return async (dispatch) => {
@@ -93,7 +94,7 @@ export const editEmployeeDesignation = (id, data) => {
     dispatch(employeeActions.loading(true));
     try {
       const response = await api.put(
-        `https://restaurantapi.bssoln.com/api/Employee/update/${id}`,
+        `${apiUrl.baseApi}Employee/update/${id}`,
         { designation: data }
       );
       console.log(response);

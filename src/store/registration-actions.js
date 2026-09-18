@@ -3,6 +3,7 @@ import { modalActions } from "./modal-slice.js";
 // import { api } from "./axiosInstance";
 import { registerActions } from "./register-slice.js";
 import axios from "axios";
+import apiUrl from "../../apiUrl/ApiUrl.jsx";
 
 
 
@@ -14,7 +15,7 @@ export const createUser= (formData) => {
    
     console.log("Data", formData);
     try {
-      const response = await axios.post("https://restaurantapi.bssoln.com/api/Auth/signUp", formData);
+      const response = await axios.post(`${apiUrl.baseApi}Auth/signUp`, formData);
       console.log("createResult", response);
       if (response.status === 200) {
         dispatch(modalActions.close());

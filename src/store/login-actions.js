@@ -1,11 +1,12 @@
 import axios from "axios";
 import { modalActions } from "./modal-slice.js";
 import { loginActions } from "./login-slice.js";
+import apiUrl from "../../apiUrl/ApiUrl.jsx";
 
 export const setLoginData = (data) => {
   return async (dispatch) => {
     try {
-      const res = await dispatch(loginActions.setFormData(data));
+      dispatch(loginActions.setFormData(data));
     } catch (error) {
       console.log(error);
     }
@@ -17,7 +18,7 @@ export const submitLogin = (formData) => {
     dispatch(loginActions.loading(true));
     try {
       const response = await axios.post(
-        `https://bssrms.runasp.net/api/Auth/SignIn`,
+        `${apiUrl.baseApi}Auth/SignIn`,
         formData
       );
       if (response.status === 200) {
@@ -28,6 +29,7 @@ export const submitLogin = (formData) => {
         sessionStorage.setItem("token", token);
         sessionStorage.setItem("refreshToken", refreshToken);
         sessionStorage.setItem("user", JSON.stringify(user));
+        console.log(user);
         return Promise.resolve(`/${user.fullName}`);
       }
     } catch (error) {

@@ -23,7 +23,7 @@ export default function Button({
 // Add PropTypes validation
 Button.propTypes = {
   children: PropTypes.node.isRequired,
-  textOnly: PropTypes.string,
-  disabled: PropTypes.string,
+  textOnly: PropTypes.bool,
+  disabled: PropTypes.bool,
   className: PropTypes.string,
 };
