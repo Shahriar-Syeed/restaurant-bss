@@ -31,7 +31,7 @@ const CustomSelect = ({
       dispatch(customSelectActions.setIsFocused(true));
       onChanged(optionSelected);
       dispatch(customSelectActions.setSelectedOption(selectedValue));
-      console.log(selectedOption, "111111111111111111111111111");
+      console.log(selectedOption, "111111111");
     }
     const handler = (e) => {
       if (!showOption.current.contains(e.target)) {
