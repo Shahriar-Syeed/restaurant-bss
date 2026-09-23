@@ -1,6 +1,6 @@
 import axios from "axios";
 // import { redirect } from "react-router-dom";
-import apiUrl from "../../apiUrl/ApiUrl.jsx";
+import apiUrl from "../apiUrl/ApiUrl.jsx";
 
 export const api = axios.create({
   baseURL: "https://restaurantapi.bssoln.com/api/",

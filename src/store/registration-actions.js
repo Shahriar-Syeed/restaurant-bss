@@ -3,7 +3,7 @@ import { modalActions } from "./modal-slice.js";
 // import { api } from "./axiosInstance";
 import { registerActions } from "./register-slice.js";
 import axios from "axios";
-import apiUrl from "../../apiUrl/ApiUrl.jsx";
+import apiUrl from "../apiUrl/ApiUrl.jsx";
 
 
 
