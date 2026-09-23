@@ -1,7 +1,7 @@
 import { employeeActions } from "./employee-slice";
 import { modalActions } from "./modal-slice";
 import { api } from "./axiosInstance";
-import apiUrl from "../../apiUrl/ApiUrl.jsx";
+import apiUrl from "../apiUrl/ApiUrl.jsx";
 
 export const getEmployees = (page, perPage) => {
   return async (dispatch) => {
