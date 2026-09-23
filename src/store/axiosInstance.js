@@ -3,7 +3,7 @@ import axios from "axios";
 import apiUrl from "../apiUrl/ApiUrl.jsx";
 
 export const api = axios.create({
-  baseURL: "https://restaurantapi.bssoln.com/api/",
+  baseURL: "https://bssrms.runasp.net/api/",
 });
 
 api.interceptors.request.use(
