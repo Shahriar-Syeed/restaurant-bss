@@ -1,7 +1,7 @@
 import axios from "axios";
 import { modalActions } from "./modal-slice.js";
 import { loginActions } from "./login-slice.js";
-import apiUrl from "../../apiUrl/ApiUrl.jsx";
+import apiUrl from "../apiUrl/ApiUrl.jsx";
 
 export const setLoginData = (data) => {
   return async (dispatch) => {
