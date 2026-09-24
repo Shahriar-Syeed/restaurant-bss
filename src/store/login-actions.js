@@ -17,6 +17,7 @@ export const submitLogin = (formData) => {
   return async (dispatch) => {
     dispatch(loginActions.loading(true));
     try {
+      console.log(apiUrl);
       const response = await axios.post(
         `${apiUrl.baseApi}Auth/SignIn`,
         formData
