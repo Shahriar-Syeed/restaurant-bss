@@ -28,7 +28,7 @@ api.interceptors.response.use(
       originalRequest._retry = true;
       try {
         const refreshResponse = await axios.post(
-          `${apiUrl.baseApi}Auth/refreshToken`,
+          `/Auth/refreshToken`,
           {
             refreshToken: sessionStorage.getItem("refreshToken"),
           }
