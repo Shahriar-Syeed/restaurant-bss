@@ -25,7 +25,7 @@ const requireAuth = async () => {
   const user = await JSON.parse(sessionStorage.getItem("user"));
   const saveToken = sessionStorage.getItem("token");
   if (
-    user?.id === "eb87aaa2-bf85-48d5-56a4-08d906dd12b1" &&
+    user?.id === "a080b321-b765-450e-9ab7-6a8a47864006" &&
     saveToken?.startsWith("Bearer")
   ) {
     return null;
