@@ -17,7 +17,7 @@ export const submitLogin = (formData) => {
   return async (dispatch) => {
     dispatch(loginActions.loading(true));
     try {
-      console.log(apiUrl);
+      console.log(apiUrl, 'apiurl');
       const response = await axios.post(
         `${apiUrl.baseApi}Auth/SignIn`,
         formData
@@ -31,7 +31,7 @@ export const submitLogin = (formData) => {
         sessionStorage.setItem("refreshToken", refreshToken);
         sessionStorage.setItem("user", JSON.stringify(user));
         console.log(user);
-        return Promise.resolve(`/${user.fullName}`);
+        return Promise.resolve(`/admin`);
       }
     } catch (error) {
       dispatch(modalActions.id("Failed To Login"));

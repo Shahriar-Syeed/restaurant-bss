@@ -3,7 +3,7 @@ import axios from "axios";
 import apiUrl from "../apiUrl/ApiUrl.jsx";
 
 export const api = axios.create({
-  baseURL: "https://bssrms.runasp.net/api/",
+  baseURL: apiUrl.baseApi,
 });
 
 api.interceptors.request.use(
@@ -12,7 +12,7 @@ api.interceptors.request.use(
     if (token) {
       config.headers.Authorization = token;
     }
-    console.log(config);
+    console.log(config, 'config');
     return config;
   },
   (error) => {
